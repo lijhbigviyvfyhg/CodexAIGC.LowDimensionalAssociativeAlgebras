@@ -13,6 +13,15 @@ The final theorem must package V3 and V4 as a unique normal-form statement, not 
 
 For the finite-field track, a computation is accepted as V4 evidence only when Lean verifies a certificate covering every associative table up to the `GL(n, 2)` action. A process exit code, row count, checksum, or agreement with a paper is not itself a completeness proof.
 
+## Verified slices
+
+| Base fields | Dimensions | V1 | V2 | V3 | V4 |
+|---|---:|---|---|---|---|
+| every field, hence `ℂ`, `ℝ`, `𝔽₂` | 0, 1 | Passed | Passed | Passed | Passed |
+| `ℂ`, `ℝ`, `𝔽₂` | 2, 3, 4 | Not complete | Not complete | Not complete | Not complete |
+
+The first row is certified by `DimensionZero.classification`, `DimensionOne.table_isomorphic_iff`, and `DimensionOne.classification`; explicit target-field wrappers are compiled in `TargetFieldsZeroOne.lean`. “Passed” applies only to that row and does not weaken the repository-wide completion flags.
+
 ## Per-candidate evidence card
 
 Each normal form must record:

@@ -23,10 +23,15 @@
     "all_candidates_associative": false,
     "literature_audit_complete": false
   },
+  "verified_slices": {
+    "Complex": [0, 1],
+    "Real": [0, 1],
+    "F_2": [0, 1]
+  },
   "counts": {
     "sources_found": 8,
     "sources_downloaded": 8,
     "sources_read": 0,
-    "normal_forms_verified": 0
+    "normal_forms_verified": 3
   }
 }
