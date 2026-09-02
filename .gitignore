@@ -1,6 +1,7 @@
 /.lake/
 /CodexAIGC.references/pdfs/
 /CodexAIGC.references/extracted/
+/tmp/
 *.olean
 *.ilean
 *.trace

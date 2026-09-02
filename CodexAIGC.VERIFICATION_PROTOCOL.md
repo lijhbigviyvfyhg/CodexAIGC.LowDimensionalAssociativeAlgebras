@@ -9,7 +9,9 @@ A candidate or family is `verified` only when all four gates below have Lean dec
 | V3 | Two canonical indices yield isomorphic algebras only when the indices are equal. | `NormalForm.injective` | Not started |
 | V4 | Every in-scope algebra is isomorphic to a canonical normal form. | `Classification.surjective` | Not started |
 
-The final theorem must package V3 and V4 as a unique normal-form statement, not infer completeness from matching counts.
+The final theorem must package V3 and V4 as a unique normal-form statement, not infer completeness from matching counts. It must be instantiated independently for `ℂ`, `ℝ`, and `𝔽₂`; success over one field says nothing automatic about the other two.
+
+For the finite-field track, a computation is accepted as V4 evidence only when Lean verifies a certificate covering every associative table up to the `GL(n, 2)` action. A process exit code, row count, checksum, or agreement with a paper is not itself a completeness proof.
 
 ## Per-candidate evidence card
 

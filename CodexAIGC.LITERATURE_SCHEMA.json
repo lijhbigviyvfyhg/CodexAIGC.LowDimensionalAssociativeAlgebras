@@ -1,44 +1,86 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "CodexAIGC literature database",
-  "type": "array",
-  "items": {
-    "type": "object",
-    "required": ["title", "status", "authors", "source_url", "found_from", "related"],
-    "properties": {
-      "title": {"type": "string", "minLength": 1},
-      "status": {
-        "enum": ["already_read", "already_found", "already_downloaded", "needs_download", "download_failed"]
-      },
-      "authors": {"type": "array", "items": {"type": "string"}},
-      "arxiv_id": {"type": ["string", "null"]},
-      "doi": {"type": ["string", "null"]},
-      "year_or_version_date": {"type": ["string", "null"]},
-      "subject_area": {"type": ["string", "null"]},
-      "source_url": {"type": "string", "format": "uri"},
-      "local_path": {"type": ["string", "null"]},
-      "sha256": {"type": ["string", "null"]},
-      "download_attempts": {"type": "array", "items": {"type": "string"}},
-      "found_from": {"type": "array", "items": {"type": "string"}},
-      "cited_by_read_papers": {"type": "array", "items": {"type": "string"}},
-      "related": {"type": "string"},
-      "scope_tags": {
-        "type": "object",
-        "properties": {
-          "field": {"type": ["string", "null"]},
-          "characteristic": {"type": ["string", "null"]},
-          "unitality": {"type": ["string", "null"]},
-          "dimensions": {"type": "array", "items": {"type": "integer", "minimum": 0}},
-          "equivalence_relation": {"type": ["string", "null"]}
-        }
-      },
-      "audit": {
-        "type": "object",
-        "properties": {
-          "metadata_verified": {"type": "boolean"},
-          "classification_claim_verified": {"type": "boolean"},
-          "known_errors": {"type": "array", "items": {"type": "string"}},
-          "license_note": {"type": ["string", "null"]}
+  "type": "object",
+  "required": ["schema_version", "updated", "papers"],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "updated": {"type": "string", "format": "date"},
+    "papers": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/paper"}
+    }
+  },
+  "$defs": {
+    "paper": {
+      "type": "object",
+      "required": ["status", "authors", "source_url", "found_from", "related"],
+      "properties": {
+        "status": {
+          "enum": ["already_read", "already_found", "already_downloaded", "needs_download", "download_failed"]
+        },
+        "authors": {"type": "array", "items": {"type": "string"}},
+        "arxiv_id": {"type": ["string", "null"]},
+        "doi": {"type": ["string", "null"]},
+        "version_date": {"type": ["string", "null"]},
+        "subject": {"type": ["string", "null"]},
+        "source_url": {"type": "string", "format": "uri"},
+        "local_path": {"type": ["string", "null"]},
+        "sha256": {"type": ["string", "null"]},
+        "attempts": {"type": "array", "items": {"type": "string"}},
+        "found_from": {"type": "array", "items": {"type": "string"}},
+        "cited_by": {"type": "array", "items": {"type": "string"}},
+        "related": {"type": "string"},
+        "scope_tags": {
+          "type": "object",
+          "properties": {
+            "fields": {"type": "array", "items": {"type": "string"}},
+            "characteristics": {"type": "array", "items": {"type": "string"}},
+            "unitality": {"type": ["string", "null"]},
+            "dimensions": {"type": "array", "items": {"type": "integer", "minimum": 0}},
+            "equivalence_relation": {"type": ["string", "null"]}
+          }
+        },
+        "publication": {
+          "type": "object",
+          "properties": {
+            "venue": {"type": ["string", "null"]},
+            "year": {"type": ["integer", "null"]},
+            "pages": {"type": ["string", "null"]}
+          }
+        },
+        "index_verification": {
+          "type": "object",
+          "properties": {
+            "crossref": {"type": ["string", "null"]},
+            "openalex": {"type": ["string", "null"]},
+            "semantic_scholar": {"type": ["string", "null"]}
+          }
+        },
+        "trust_chain": {
+          "type": "object",
+          "required": ["acquired", "integrity_verified", "extracted", "visually_checked", "verified_against_original"],
+          "properties": {
+            "acquired": {"type": "boolean"},
+            "integrity_verified": {"type": "boolean"},
+            "extracted": {"type": "boolean"},
+            "visually_checked": {"type": "boolean"},
+            "verified_against_original": {"type": "boolean"},
+            "method": {"type": "string"},
+            "description_source": {"type": "string"}
+          }
+        },
+        "audit": {
+          "type": "object",
+          "properties": {
+            "metadata_verified": {"type": "boolean"},
+            "classification_claim_verified": {"type": "boolean"},
+            "disposition": {"type": "string"},
+            "provisional_quality": {"type": "string"},
+            "known_errors": {"type": "array", "items": {"type": "string"}},
+            "limitations": {"type": "array", "items": {"type": "string"}},
+            "license_note": {"type": ["string", "null"]}
+          }
         }
       }
     }

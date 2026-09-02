@@ -1,0 +1,390 @@
+{
+  "schema_version": "0.2.0",
+  "updated": "2026-09-02",
+  "papers": {
+    "Complete lists of low dimensional complex associative algebras": {
+      "status": "already_downloaded",
+      "authors": ["I. S. Rakhimov", "I. M. Rikhsiboev", "W. Basri"],
+      "arxiv_id": "0910.0932v2",
+      "doi": null,
+      "version_date": "2009-10-07",
+      "subject": "Associative algebras; complex low-dimensional classification tables",
+      "source_url": "https://arxiv.org/abs/0910.0932",
+      "local_path": "CodexAIGC.references/pdfs/0910_0932v2_Rakhimov-Rikhsiboev-Basri_Complete-lists.pdf",
+      "sha256": "9b76b8683ff624b32d911dc0df7cc28d553baba21734ac9ca8941835f3c58d51",
+      "attempts": ["2026-09-02: downloaded arXiv v2 PDF; SHA-256 recorded; text extracted"],
+      "found_from": ["arXiv keyword search", "citation trail from later classification papers"],
+      "cited_by": [],
+      "related": "Broad complex list to compare against independently proved normal forms; not accepted as a completeness proof.",
+      "scope_tags": {
+        "fields": ["Complex"],
+        "characteristics": ["0"],
+        "unitality": "unital and nonunital",
+        "dimensions": [1, 2, 3, 4],
+        "equivalence_relation": "complex algebra isomorphism"
+      },
+      "publication": {"venue": null, "year": 2009, "pages": null},
+      "index_verification": {
+        "crossref": null,
+        "openalex": "W2124070019",
+        "semantic_scholar": "c3430210e9be8f44219fb09fdf52d40c5178c241"
+      },
+      "trust_chain": {
+        "acquired": true,
+        "integrity_verified": true,
+        "extracted": true,
+        "visually_checked": true,
+        "verified_against_original": false,
+        "method": "SHA-256, pdftotext, rendered-page inspection",
+        "description_source": "original arXiv PDF"
+      },
+      "audit": {
+        "metadata_verified": true,
+        "classification_claim_verified": false,
+        "disposition": "quarantine_completeness_claim; candidate extraction only",
+        "provisional_quality": "D for completeness evidence",
+        "known_errors": [],
+        "limitations": [
+          "The body says proofs are omitted.",
+          "The displayed tables are described as indecomposable algebras, so decomposable reconstruction must be audited separately.",
+          "The abstract says up to dimension five, while the retrieved body tables cover dimensions two through four."
+        ],
+        "license_note": "Metadata only is committed; PDF remains local and ignored."
+      }
+    },
+    "Classification of nilpotent associative algebras of small dimension": {
+      "status": "already_downloaded",
+      "authors": ["Willem A. de Graaf"],
+      "arxiv_id": "1009.5339v2",
+      "doi": "10.1142/S0218196718500078",
+      "version_date": "2017-05-22",
+      "subject": "Nilpotent associative algebras over arbitrary fields",
+      "source_url": "https://arxiv.org/abs/1009.5339",
+      "local_path": "CodexAIGC.references/pdfs/1009_5339v2_de-Graaf_Nilpotent-small-dimension.pdf",
+      "sha256": "b0f35ab5751daf8c2951e5c2bc84b1196ffebcaa1e03620be340d4370f806bd3",
+      "attempts": ["2026-09-02: downloaded arXiv v2 PDF; SHA-256 recorded; text extracted"],
+      "found_from": ["arXiv keyword search", "Crossref DOI lookup", "citation graph"],
+      "cited_by": [],
+      "related": "Primary arbitrary-field source for dimensions at most four, including explicit finite-field and real-field lists.",
+      "scope_tags": {
+        "fields": ["Complex", "Real", "F_2", "arbitrary field"],
+        "characteristics": ["arbitrary"],
+        "unitality": "nilpotent, hence generally nonunital except the zero algebra convention",
+        "dimensions": [1, 2, 3, 4],
+        "equivalence_relation": "field-linear algebra isomorphism"
+      },
+      "publication": {"venue": "International Journal of Algebra and Computation", "year": 2018, "pages": "133-161"},
+      "index_verification": {
+        "crossref": "exact DOI/title/author match",
+        "openalex": "W2963195604",
+        "semantic_scholar": "ba4b029c3ec05753a606698bb65f432ce01992d4"
+      },
+      "trust_chain": {
+        "acquired": true,
+        "integrity_verified": true,
+        "extracted": true,
+        "visually_checked": true,
+        "verified_against_original": false,
+        "method": "SHA-256, pdftotext, rendered-page inspection",
+        "description_source": "original arXiv PDF and publisher DOI metadata"
+      },
+      "audit": {
+        "metadata_verified": true,
+        "classification_claim_verified": false,
+        "disposition": "priority_full_audit",
+        "provisional_quality": "A for source relevance; theorem content still unverified",
+        "known_errors": [],
+        "limitations": [
+          "Computer algebra is used, and most bulky polynomial certificates are omitted from the article.",
+          "Only the nilpotent sector is classified."
+        ],
+        "license_note": "Metadata only is committed; PDF remains local and ignored."
+      }
+    },
+    "Classification of Novikov algebras": {
+      "status": "already_downloaded",
+      "authors": ["Dietrich Burde", "Willem de Graaf"],
+      "arxiv_id": "1106.5954v1",
+      "doi": "10.1007/s00200-012-0180-x",
+      "version_date": "2011-06-29",
+      "subject": "Novikov algebras; complex commutative associative sub-classification",
+      "source_url": "https://arxiv.org/abs/1106.5954",
+      "local_path": "CodexAIGC.references/pdfs/1106_5954v1_Burde-de-Graaf_Novikov.pdf",
+      "sha256": "8356de53e1c7398ff80a9fa74fea54edecacce2bccadcd140d3e8aab3f8a596e",
+      "attempts": [
+        "2026-09-02: arXiv v2 URL returned HTTP 404",
+        "2026-09-02: downloaded available arXiv v1 PDF; SHA-256 recorded; text extracted"
+      ],
+      "found_from": ["citation trail", "arXiv identifier lookup", "Crossref DOI lookup"],
+      "cited_by": [],
+      "related": "Independent cross-check for the commutative complex four-dimensional sector.",
+      "scope_tags": {
+        "fields": ["Complex"],
+        "characteristics": ["0"],
+        "unitality": "mixed",
+        "dimensions": [4],
+        "equivalence_relation": "complex algebra isomorphism"
+      },
+      "publication": {"venue": "Beiträge zur Algebra und Geometrie / Contributions to Algebra and Geometry", "year": 2013, "pages": null},
+      "index_verification": {
+        "crossref": "exact DOI/title/authors match",
+        "openalex": "W2110271987",
+        "semantic_scholar": "6d1b50dcd904eb12aab03ffe50dcff8a6a93140f"
+      },
+      "trust_chain": {
+        "acquired": true,
+        "integrity_verified": true,
+        "extracted": true,
+        "visually_checked": false,
+        "verified_against_original": false,
+        "method": "SHA-256 and pdftotext",
+        "description_source": "original arXiv PDF and publisher DOI metadata"
+      },
+      "audit": {
+        "metadata_verified": true,
+        "classification_claim_verified": false,
+        "disposition": "supporting_crosscheck",
+        "provisional_quality": "B pending table-level audit",
+        "known_errors": [],
+        "limitations": ["Covers only the commutative associative subcase relevant here."],
+        "license_note": "Metadata only is committed; PDF remains local and ignored."
+      }
+    },
+    "Construction of Nilpotent Jordan Algebras Over any Arbitrary Fields": {
+      "status": "already_downloaded",
+      "authors": ["A. Hegazi", "H. Abdelwahab"],
+      "arxiv_id": "1301.6349v4",
+      "doi": null,
+      "version_date": "2013-05-13",
+      "subject": "Nilpotent Jordan algebras; commutative associative examples",
+      "source_url": "https://arxiv.org/abs/1301.6349",
+      "local_path": "CodexAIGC.references/pdfs/1301_6349v4_Hegazi-Abdelwahab_Nilpotent-Jordan.pdf",
+      "sha256": "71ae1de5eda3de198cd4b1d73abd674087106ca345e14d44be910bf199f4943a",
+      "attempts": ["2026-09-02: downloaded restored arXiv v4 PDF; SHA-256 recorded; text extracted"],
+      "found_from": ["arXiv keyword search", "citation trail"],
+      "cited_by": [],
+      "related": "Possible cross-check for commutative nilpotent associative cases, not a classification of all associative algebras.",
+      "scope_tags": {
+        "fields": ["arbitrary field"],
+        "characteristics": ["arbitrary with theorem-specific restrictions to audit"],
+        "unitality": "nilpotent",
+        "dimensions": [1, 2, 3, 4],
+        "equivalence_relation": "Jordan algebra isomorphism; associative subcase requires separate extraction"
+      },
+      "publication": {"venue": null, "year": 2013, "pages": null},
+      "index_verification": {
+        "crossref": null,
+        "openalex": null,
+        "semantic_scholar": "f83001adf10d2eb9ae6aed80fd847a7077f8334d"
+      },
+      "trust_chain": {
+        "acquired": true,
+        "integrity_verified": true,
+        "extracted": true,
+        "visually_checked": false,
+        "verified_against_original": false,
+        "method": "SHA-256 and pdftotext",
+        "description_source": "original arXiv v4 PDF"
+      },
+      "audit": {
+        "metadata_verified": true,
+        "classification_claim_verified": false,
+        "disposition": "supporting_source_with_version_caution",
+        "provisional_quality": "C pending theorem and version-history audit",
+        "known_errors": ["arXiv v2 was withdrawn; only restored v4 is retained locally"],
+        "limitations": ["The main category is Jordan, not associative; only a subset is relevant."],
+        "license_note": "Metadata only is committed; PDF remains local and ignored."
+      }
+    },
+    "The moduli space of 4-dimensional nilpotent complex associative algebras": {
+      "status": "already_downloaded",
+      "authors": ["Alice Fialowski", "Michael Penkava"],
+      "arxiv_id": "1309.5770v1",
+      "doi": "10.1016/j.laa.2014.05.014",
+      "version_date": "2013-09-23",
+      "subject": "Four-dimensional nilpotent complex associative algebras",
+      "source_url": "https://arxiv.org/abs/1309.5770",
+      "local_path": "CodexAIGC.references/pdfs/1309_5770v1_Fialowski-Penkava_Nilpotent-complex-4D.pdf",
+      "sha256": "68a36b7921684d331b8b73b48697ac81b013574fa083321a8e072777ea59063a",
+      "attempts": ["2026-09-02: downloaded arXiv v1 PDF; SHA-256 recorded; text extracted"],
+      "found_from": ["arXiv keyword search", "Crossref DOI lookup", "paired-paper citation trail"],
+      "cited_by": [],
+      "related": "One half of the complex four-dimensional classification program; contains parameter families and nontrivial parameter identifications.",
+      "scope_tags": {
+        "fields": ["Complex"],
+        "characteristics": ["0"],
+        "unitality": "nilpotent",
+        "dimensions": [4],
+        "equivalence_relation": "complex algebra isomorphism with parameter-orbit identifications"
+      },
+      "publication": {"venue": "Linear Algebra and its Applications", "year": 2014, "pages": "408-427"},
+      "index_verification": {
+        "crossref": "exact DOI/title/authors match",
+        "openalex": "W2084974224",
+        "semantic_scholar": "6890fe327d9fd62e44197f7e99abaf19d45db3a4 (conflicted record; do not use for identity)"
+      },
+      "trust_chain": {
+        "acquired": true,
+        "integrity_verified": true,
+        "extracted": true,
+        "visually_checked": false,
+        "verified_against_original": false,
+        "method": "SHA-256 and pdftotext",
+        "description_source": "original arXiv PDF and publisher DOI metadata"
+      },
+      "audit": {
+        "metadata_verified": true,
+        "classification_claim_verified": false,
+        "disposition": "priority_full_audit",
+        "provisional_quality": "B pending multiplication-table and orbit audit",
+        "known_errors": ["Semantic Scholar conflates this record with arXiv:1309.6050; Crossref and arXiv distinguish them."],
+        "limitations": ["Only the nilpotent sector; projective-family quotient relations require explicit verification."],
+        "license_note": "Metadata only is committed; PDF remains local and ignored."
+      }
+    },
+    "The moduli space of 4-dimensional non-nilpotent complex associative algebras": {
+      "status": "already_downloaded",
+      "authors": ["Alice Fialowski", "Michael Penkava"],
+      "arxiv_id": "1309.6050v1",
+      "doi": "10.1515/forum-2012-0124",
+      "version_date": "2013-09-24",
+      "subject": "Four-dimensional non-nilpotent complex associative algebras",
+      "source_url": "https://arxiv.org/abs/1309.6050",
+      "local_path": "CodexAIGC.references/pdfs/1309_6050v1_Fialowski-Penkava_Nonnilpotent-complex-4D.pdf",
+      "sha256": "4da5467d17205e5a7a75c94f629ce0ddedb52f9967ac3d4fe3678ed6f4350cae",
+      "attempts": ["2026-09-02: downloaded arXiv v1 PDF; SHA-256 recorded; text extracted"],
+      "found_from": ["arXiv keyword search", "Crossref DOI lookup", "paired-paper citation trail"],
+      "cited_by": [],
+      "related": "The non-nilpotent half of a complex four-dimensional moduli-space classification; must be reconciled with independent lists.",
+      "scope_tags": {
+        "fields": ["Complex"],
+        "characteristics": ["0"],
+        "unitality": "mixed",
+        "dimensions": [4],
+        "equivalence_relation": "complex algebra isomorphism with parameter-orbit identifications"
+      },
+      "publication": {"venue": "Forum Mathematicum", "year": 2015, "pages": "1401-1434"},
+      "index_verification": {
+        "crossref": "exact DOI/title/authors match",
+        "openalex": null,
+        "semantic_scholar": "6890fe327d9fd62e44197f7e99abaf19d45db3a4 (conflicted record; do not use for identity)"
+      },
+      "trust_chain": {
+        "acquired": true,
+        "integrity_verified": true,
+        "extracted": true,
+        "visually_checked": true,
+        "verified_against_original": false,
+        "method": "SHA-256, pdftotext, rendered-page inspection",
+        "description_source": "original arXiv PDF and publisher DOI metadata"
+      },
+      "audit": {
+        "metadata_verified": true,
+        "classification_claim_verified": false,
+        "disposition": "priority_full_audit",
+        "provisional_quality": "B pending multiplication-table and orbit audit",
+        "known_errors": ["Semantic Scholar conflates this record with arXiv:1309.5770; Crossref and arXiv distinguish them."],
+        "limitations": [
+          "Only the non-nilpotent sector; the paper reports 72 families rather than a short finite list.",
+          "The paper itself warns that a historical Peirce list includes nonassociative entries in an asserted associative sublist."
+        ],
+        "license_note": "Metadata only is committed; PDF remains local and ignored."
+      }
+    },
+    "Isomorphism classes of four dimensional nilpotent associative algebras over a field": {
+      "status": "already_downloaded",
+      "authors": ["Marco Antonio Pellegrini"],
+      "arxiv_id": "1702.00143v2",
+      "doi": "10.1016/j.laa.2017.07.015",
+      "version_date": "2017-02-16",
+      "subject": "Four-dimensional nilpotent associative algebras over arbitrary fields",
+      "source_url": "https://arxiv.org/abs/1702.00143",
+      "local_path": "CodexAIGC.references/pdfs/1702_00143v2_Pellegrini_Four-dimensional-nilpotent.pdf",
+      "sha256": "a8f1b4807f81e6dddec53b5996c9aeee0069bf6748e866cc3ff85f502761fc79",
+      "attempts": ["2026-09-02: downloaded arXiv v2 PDF; SHA-256 recorded; text extracted"],
+      "found_from": ["arXiv keyword search", "Crossref DOI lookup", "citation graph"],
+      "cited_by": [],
+      "related": "Independent explicit representatives for finite fields, the real field, and algebraically closed fields; key cross-check against de Graaf.",
+      "scope_tags": {
+        "fields": ["Complex", "Real", "F_2", "arbitrary field"],
+        "characteristics": ["arbitrary with characteristic-specific cases"],
+        "unitality": "nilpotent",
+        "dimensions": [4],
+        "equivalence_relation": "field-linear algebra isomorphism"
+      },
+      "publication": {"venue": "Linear Algebra and its Applications", "year": 2017, "pages": "132-160"},
+      "index_verification": {
+        "crossref": "exact DOI/title/author match",
+        "openalex": "W2584103571",
+        "semantic_scholar": "e18a0d8ac2424068e167635b6524f59ca5aba96f"
+      },
+      "trust_chain": {
+        "acquired": true,
+        "integrity_verified": true,
+        "extracted": true,
+        "visually_checked": true,
+        "verified_against_original": false,
+        "method": "SHA-256, pdftotext, rendered-page inspection",
+        "description_source": "original arXiv PDF and publisher DOI metadata"
+      },
+      "audit": {
+        "metadata_verified": true,
+        "classification_claim_verified": false,
+        "disposition": "priority_full_audit",
+        "provisional_quality": "A for source relevance; theorem content still unverified",
+        "known_errors": [],
+        "limitations": ["Only dimension four and only the nilpotent sector."],
+        "license_note": "Metadata only is committed; PDF remains local and ignored."
+      }
+    },
+    "Isomorphism problem and homological properties of DG free algebras": {
+      "status": "already_downloaded",
+      "authors": ["X.-F. Mao", "J.-F. Xie", "Y.-N. Yang", "Almire Abla"],
+      "arxiv_id": "1805.02001v1",
+      "doi": "10.1080/00927872.2019.1576187",
+      "version_date": "2018-05-05",
+      "subject": "DG free algebras; claimed relation to finite-dimensional associative algebras",
+      "source_url": "https://arxiv.org/abs/1805.02001",
+      "local_path": "CodexAIGC.references/pdfs/1805_02001v1_Mao-Xie-Yang-Abla_DG-free-algebras_QUARANTINE.pdf",
+      "sha256": "35f8123de3d546e56dffe532bf53b20329966b301a11e65b4de310f9a8763234",
+      "attempts": ["2026-09-02: downloaded arXiv v1 PDF; SHA-256 recorded; text extracted; quarantined"],
+      "found_from": ["arXiv related-result search", "Crossref DOI lookup", "local mathematical error-correction dossier"],
+      "cited_by": [],
+      "related": "Negative-control source: useful for a duality construction, unsafe as a classification authority.",
+      "scope_tags": {
+        "fields": ["general base field"],
+        "characteristics": ["unspecified"],
+        "unitality": "dual finite-dimensional multiplication need not be unital",
+        "dimensions": [2],
+        "equivalence_relation": "DG-algebra isomorphism and induced linear changes of generators"
+      },
+      "publication": {"venue": "Communications in Algebra", "year": 2019, "pages": null},
+      "index_verification": {
+        "crossref": "exact DOI/title/authors match",
+        "openalex": null,
+        "semantic_scholar": "3cdf36fa1adce6c541e2536760ffeea4a0478fdb"
+      },
+      "trust_chain": {
+        "acquired": true,
+        "integrity_verified": true,
+        "extracted": true,
+        "visually_checked": false,
+        "verified_against_original": false,
+        "method": "SHA-256 and pdftotext",
+        "description_source": "original arXiv PDF, publisher DOI metadata, and explicit counterexample calculation"
+      },
+      "audit": {
+        "metadata_verified": true,
+        "classification_claim_verified": false,
+        "disposition": "rejected_as_classification_authority",
+        "provisional_quality": "D for the relevant classification claim",
+        "known_errors": [
+          "The square-zero differential condition dualizes to associativity, not automatically to commutativity.",
+          "For d(x)=x^2 and d(y)=xy, the dual multiplication has e_x e_y=e_y but e_y e_x=0, so it is associative and noncommutative."
+        ],
+        "limitations": ["The paper's main topic is DG free algebras, not a complete low-dimensional associative-algebra classification."],
+        "license_note": "Metadata only is committed; PDF remains local and ignored."
+      }
+    }
+  }
+}
