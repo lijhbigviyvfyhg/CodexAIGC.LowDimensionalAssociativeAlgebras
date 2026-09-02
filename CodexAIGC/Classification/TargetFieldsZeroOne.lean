@@ -1,8 +1,5 @@
 import CodexAIGC.Classification.DimensionZeroOne
-import Mathlib.Data.Complex.Basic
-import Mathlib.Data.Real.Basic
-import Mathlib.Data.ZMod.Basic
-import Mathlib.Algebra.Field.ZMod
+import CodexAIGC.Foundations.TargetFields
 
 /-!
 # Explicit dimension-zero and dimension-one target-field theorems
@@ -12,9 +9,6 @@ the three fields in the project scope.
 -/
 
 namespace CodexAIGC.TargetFields
-
-/-- The two-element field used by the finite classification track. -/
-abbrev F₂ := ZMod 2
 
 theorem complex_dimension_zero (c : StructureConstants ℂ 0) :
     ∃! i, StructureConstants.Isomorphic c (DimensionZero.table (K := ℂ) i) :=
@@ -41,4 +35,3 @@ theorem f2_dimension_one (c : StructureConstants F₂ 1) :
   DimensionOne.classification c
 
 end CodexAIGC.TargetFields
-

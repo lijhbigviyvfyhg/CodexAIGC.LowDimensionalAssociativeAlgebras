@@ -26,12 +26,22 @@
   "verified_slices": {
     "Complex": [0, 1],
     "Real": [0, 1],
-    "F_2": [0, 1]
+    "F_2": [0, 1, 2]
+  },
+  "finite_certificates": {
+    "F_2_dimension_2": {
+      "all_tables": 256,
+      "associative_tables": 28,
+      "change_of_basis_group_order": 6,
+      "isomorphism_orbits": 8,
+      "kernel_decide": true,
+      "native_decide": false
+    }
   },
   "counts": {
     "sources_found": 8,
     "sources_downloaded": 8,
     "sources_read": 0,
-    "normal_forms_verified": 3
+    "normal_forms_verified": 11
   }
 }

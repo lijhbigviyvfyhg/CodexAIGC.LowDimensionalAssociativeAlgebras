@@ -20,6 +20,10 @@ def mul [CommSemiring K] (c : StructureConstants K n)
     (x y : Fin n → K) : Fin n → K :=
   fun k ↦ ∑ i : Fin n, ∑ j : Fin n, x i * y j * c.coeff i j k
 
+/-- Associativity of the actual multiplication on coordinate vectors. -/
+def MultiplicationAssociative [CommSemiring K] (c : StructureConstants K n) : Prop :=
+  ∀ x y z, c.mul (c.mul x y) z = c.mul x (c.mul y z)
+
 @[simp]
 theorem zero_mul [CommSemiring K] (x y : Fin n → K) :
     (0 : StructureConstants K n).mul x y = 0 := by
@@ -39,6 +43,15 @@ variable [Field K] {a b c : StructureConstants K n}
 theorem map_mul (e : TableEquiv a b) (x y : Fin n → K) :
     e.toLinearEquiv (a.mul x y) = b.mul (e.toLinearEquiv x) (e.toLinearEquiv y) :=
   e.map_mul' x y
+
+/-- A table equivalence transports associativity of the actual multiplication. -/
+theorem map_multiplicationAssociative (e : TableEquiv a b) :
+    a.MultiplicationAssociative → b.MultiplicationAssociative := by
+  intro ha x' y' z'
+  obtain ⟨x, rfl⟩ := e.toLinearEquiv.surjective x'
+  obtain ⟨y, rfl⟩ := e.toLinearEquiv.surjective y'
+  obtain ⟨z, rfl⟩ := e.toLinearEquiv.surjective z'
+  simpa only [e.map_mul] using congrArg e.toLinearEquiv (ha x y z)
 
 /-- Identity is a table equivalence. -/
 def refl (a : StructureConstants K n) : TableEquiv a a where
@@ -88,4 +101,3 @@ theorem equivalence : Equivalence (@Isomorphic K n _) :=
 end Isomorphic
 
 end CodexAIGC.StructureConstants
-

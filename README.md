@@ -17,6 +17,8 @@ The project has three separate base-field tracks: `ℂ`, `ℝ`, and `𝔽₂` (`
 
 Dimensions zero and one are now completely classified over every field, and therefore explicitly over all three target fields. There is one zero-dimensional form. In dimension one there are exactly two forms: zero multiplication and `e * e = e`. Lean proves associativity, an explicit scaling isomorphism for every nonzero structure constant, non-isomorphism of the two forms, and unique coverage of every table. See [`DimensionZeroOne.lean`](./CodexAIGC/Classification/DimensionZeroOne.lean), the [target-field instances](./CodexAIGC/Classification/TargetFieldsZeroOne.lean), and the [evidence cards](./CodexAIGC.EVIDENCE_DIMENSIONS_0_1.md).
 
+Dimension two over `𝔽₂` is also complete. Kernel `decide` checks all 256 bilinear tables: 28 are associative and they form exactly eight `GL(2,2)` orbits. The proof bridges the finite matrix predicate to bijective linear multiplicative equivalence and proves unique coverage, rather than treating counts as completeness. See [`DimensionTwoF2.lean`](./CodexAIGC/Classification/DimensionTwoF2.lean) and its [evidence report](./CodexAIGC.EVIDENCE_F2_DIMENSION_2.md).
+
 ## Build
 
 ```text
@@ -37,7 +39,7 @@ Downloaded papers are kept locally under `CodexAIGC.references/pdfs/` and are ig
 
 已确认的范围分为三条独立轨道：复数 `ℂ`、实数 `ℝ` 和二元域 `𝔽₂`（Lean 中使用 `ZMod 2`）；维数包含 `0,1,2,3,4`。主分类不预设单位元；单位性与交换性作为经证明的标签及子分类记录。三个底域上的分类结论不互相沿用，每条轨道都需要独立的完整性与唯一性证明。
 
-当前已在任意域上完整证明维数 0 与维数 1 的分类，因此三条目标域轨道均已覆盖这两个维数。零维只有一个同构类；一维恰有零乘法与 `e * e = e` 两个同构类。维数 2、3、4 仍未完成，仓库不作整体完整性声明。
+当前已在任意域上完整证明维数 0 与维数 1 的分类，因此三条目标域轨道均已覆盖这两个维数。零维只有一个同构类；一维恰有零乘法与 `e * e = e` 两个同构类。另已完整证明 `𝔽₂` 上的二维分类：256 张双线性乘法表中 28 张满足结合律，组成恰好 8 个 `GL(2,2)` 同构轨道。复数、实数的二维分类以及全部三、四维情形仍未完成，仓库不作整体完整性声明。
 
 ## License
 

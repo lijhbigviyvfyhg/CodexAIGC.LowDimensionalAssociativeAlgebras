@@ -1,4 +1,7 @@
 import CodexAIGC.Foundations.StructureConstants
 import CodexAIGC.Foundations.TableIsomorphism
+import CodexAIGC.Foundations.FiniteOrbit
+import CodexAIGC.Foundations.TargetFields
 import CodexAIGC.Classification.DimensionZeroOne
 import CodexAIGC.Classification.TargetFieldsZeroOne
+import CodexAIGC.Classification.DimensionTwoF2

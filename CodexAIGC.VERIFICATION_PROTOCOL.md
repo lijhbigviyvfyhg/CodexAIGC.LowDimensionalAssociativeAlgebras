@@ -18,9 +18,11 @@ For the finite-field track, a computation is accepted as V4 evidence only when L
 | Base fields | Dimensions | V1 | V2 | V3 | V4 |
 |---|---:|---|---|---|---|
 | every field, hence `ℂ`, `ℝ`, `𝔽₂` | 0, 1 | Passed | Passed | Passed | Passed |
-| `ℂ`, `ℝ`, `𝔽₂` | 2, 3, 4 | Not complete | Not complete | Not complete | Not complete |
+| `𝔽₂` | 2 | Passed | Passed | Passed | Passed |
+| `ℂ`, `ℝ` | 2 | Not complete | Not complete | Not complete | Not complete |
+| `ℂ`, `ℝ`, `𝔽₂` | 3, 4 | Not complete | Not complete | Not complete | Not complete |
 
-The first row is certified by `DimensionZero.classification`, `DimensionOne.table_isomorphic_iff`, and `DimensionOne.classification`; explicit target-field wrappers are compiled in `TargetFieldsZeroOne.lean`. “Passed” applies only to that row and does not weaken the repository-wide completion flags.
+The first row is certified by `DimensionZero.classification`, `DimensionOne.table_isomorphic_iff`, and `DimensionOne.classification`; explicit target-field wrappers are compiled in `TargetFieldsZeroOne.lean`. The second row is certified by `DimensionTwoF2.table_multiplicationAssociative`, `DimensionTwoF2.table_isomorphic_iff`, and `DimensionTwoF2.classification`. “Passed” applies only to those rows and does not weaken the repository-wide completion flags.
 
 ## Per-candidate evidence card
 

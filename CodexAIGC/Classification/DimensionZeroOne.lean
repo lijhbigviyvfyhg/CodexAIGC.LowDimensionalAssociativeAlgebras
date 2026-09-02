@@ -42,6 +42,12 @@ theorem all_associative [CommSemiring K] (c : StructureConstants K 0) :
   rw [all_tables_eq_zero c]
   exact zero_isAssociative
 
+theorem all_multiplicationAssociative [CommSemiring K] (c : StructureConstants K 0) :
+    c.MultiplicationAssociative := by
+  rw [all_tables_eq_zero c]
+  intro x y z
+  simp
+
 /-- Gate V1: the sole displayed normal form is associative. -/
 theorem table_isAssociative [CommSemiring K] (i : NormalForm) :
     IsAssociative (table (K := K) i) := by
@@ -163,6 +169,13 @@ theorem all_associative [CommSemiring K] (c : StructureConstants K 1) :
   rw [eq_scalarTable c]
   exact scalarTable_isAssociative _
 
+theorem all_multiplicationAssociative [CommSemiring K] (c : StructureConstants K 1) :
+    c.MultiplicationAssociative := by
+  rw [eq_scalarTable c]
+  intro x y z
+  funext k
+  simp [mul_assoc, mul_left_comm, mul_comm]
+
 /-- Gate V4 (existence): every one-dimensional table reaches a normal form. -/
 theorem exists_isomorphic_normal_form [Field K] (c : StructureConstants K 1) :
     ∃ i, Isomorphic c (table (K := K) i) := by
@@ -183,4 +196,3 @@ theorem classification [Field K] (c : StructureConstants K 1) :
 end DimensionOne
 
 end CodexAIGC
-
