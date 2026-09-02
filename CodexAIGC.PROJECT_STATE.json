@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.1.0",
+  "updated": "2026-09-02",
+  "phase": 1,
+  "status": "scope_confirmation_required",
+  "environment": {
+    "lean": "4.33.1",
+    "mathlib": "v4.33.1",
+    "local_build": "passed",
+    "unfinished_proof_scan": "passed",
+    "github_actions": "template_disabled_pending_workflow_scope"
+  },
+  "provisional_scope": {
+    "base_field": "algebraically closed",
+    "characteristic": "zero",
+    "unitality": "not required",
+    "dimensions": [0, 1, 2, 3, 4],
+    "equivalence": "K-algebra isomorphism"
+  },
+  "claims": {
+    "classification_complete": false,
+    "pairwise_nonisomorphic": false,
+    "all_candidates_associative": false,
+    "literature_audit_complete": false
+  },
+  "counts": {
+    "sources_found": 0,
+    "sources_downloaded": 0,
+    "sources_read": 0,
+    "normal_forms_verified": 0
+  }
+}

@@ -1,0 +1,11 @@
+/.lake/
+/CodexAIGC.references/pdfs/
+/CodexAIGC.references/extracted/
+*.olean
+*.ilean
+*.trace
+
+# Local credentials and editor state
+.env
+.vscode/
+.idea/

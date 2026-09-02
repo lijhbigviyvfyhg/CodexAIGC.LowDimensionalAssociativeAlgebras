@@ -1,0 +1,21 @@
+name: Lean
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reject unfinished proofs
+        shell: bash
+        run: |
+          if git grep -nE '(^|[^[:alnum:]_])(sorry|admit)([^[:alnum:]_]|$)' -- '*.lean'; then
+            echo 'Forbidden unfinished proof token found.'
+            exit 1
+          fi
+      - uses: leanprover/lean-action@v1
+        with:
+          use-mathlib-cache: true
