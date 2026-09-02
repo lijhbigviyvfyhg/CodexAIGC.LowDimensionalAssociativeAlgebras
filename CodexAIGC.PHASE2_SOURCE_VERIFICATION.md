@@ -1,6 +1,6 @@
 # Phase 2 source-verification report
 
-**Status:** preliminary; no classification theorem is yet accepted as verified.  
+**Status:** literature audit preliminary; the independent Lean classifications in dimensions zero through two are verified.
 **Date:** 2026-09-02
 
 The purpose of this report is to prevent bibliographic confidence from being mistaken for mathematical verification. “Metadata verified” means that title/authors/version/DOI were checked against original arXiv or publisher records. It does **not** mean that the multiplication tables, isomorphism criteria, or completeness proof have passed the project's four proof gates.
@@ -92,4 +92,4 @@ Semantic Scholar returned the same paper identifier, `6890fe327d9fd62e44197f7e99
 
 ## Current verdict
 
-The literature base is sufficient to begin a rigorous nilpotent-sector extraction for all three fields, a complex nonnilpotent reconciliation, and an independent proof of the real/complex dimension-two slice. It is **not** sufficient to claim a complete real or `F_2` classification through dimension four, and none of the eleven sources has passed all four verification gates. The repository therefore keeps all global completion booleans set to `false`.
+The literature base is sufficient to begin a rigorous nilpotent-sector extraction for all three fields and a complex nonnilpotent reconciliation. The real/complex dimension-two slice has now been reconstructed independently and certified in Lean; this verifies the mathematical slice, not every assertion in its source papers. The literature is **not** sufficient to claim a complete real or `F_2` classification through dimension four, and no source is accepted as a proof authority. The repository therefore keeps all global completion booleans set to `false`.

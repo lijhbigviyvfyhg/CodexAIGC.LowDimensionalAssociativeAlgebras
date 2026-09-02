@@ -2,12 +2,12 @@
 
 A candidate or family is `verified` only when all four gates below have Lean declarations and no forbidden axioms.
 
-| Gate | Mathematical obligation | Planned Lean interface | Status |
+| Gate | Mathematical obligation | Current Lean interface | Status |
 |---|---|---|---|
-| V1 | The multiplication is associative. | `Candidate.isAssociative` | Not started |
-| V2 | The row/family denotes a well-defined algebra-isomorphism class; all advertised parameter identifications are realised. | `NormalForm.parameter_sound` | Not started |
-| V3 | Two canonical indices yield isomorphic algebras only when the indices are equal. | `NormalForm.injective` | Not started |
-| V4 | Every in-scope algebra is isomorphic to a canonical normal form. | `Classification.surjective` | Not started |
+| V1 | The multiplication is associative. | `table_multiplicationAssociative` | Passed for dimensions 0–2; open for 3–4 |
+| V2 | The row/family denotes a well-defined algebra-isomorphism class; all advertised parameter identifications are realised. | `TableEquiv`, field-specific normalisation lemmas | Passed for dimensions 0–2; open for 3–4 |
+| V3 | Two canonical indices yield isomorphic algebras only when the indices are equal. | `table_isomorphic_iff` | Passed for dimensions 0–2; open for 3–4 |
+| V4 | Every in-scope algebra is isomorphic to a canonical normal form. | `classification` | Passed for dimensions 0–2; open for 3–4 |
 
 The final theorem must package V3 and V4 as a unique normal-form statement, not infer completeness from matching counts. It must be instantiated independently for `ℂ`, `ℝ`, and `𝔽₂`; success over one field says nothing automatic about the other two.
 
@@ -19,10 +19,10 @@ For the finite-field track, a computation is accepted as V4 evidence only when L
 |---|---:|---|---|---|---|
 | every field, hence `ℂ`, `ℝ`, `𝔽₂` | 0, 1 | Passed | Passed | Passed | Passed |
 | `𝔽₂` | 2 | Passed | Passed | Passed | Passed |
-| `ℂ`, `ℝ` | 2 | Not complete | Not complete | Not complete | Not complete |
+| `ℂ`, `ℝ` | 2 | Passed | Passed | Passed | Passed |
 | `ℂ`, `ℝ`, `𝔽₂` | 3, 4 | Not complete | Not complete | Not complete | Not complete |
 
-The first row is certified by `DimensionZero.classification`, `DimensionOne.table_isomorphic_iff`, and `DimensionOne.classification`; explicit target-field wrappers are compiled in `TargetFieldsZeroOne.lean`. The second row is certified by `DimensionTwoF2.table_multiplicationAssociative`, `DimensionTwoF2.table_isomorphic_iff`, and `DimensionTwoF2.classification`. “Passed” applies only to those rows and does not weaken the repository-wide completion flags.
+The first row is certified by `DimensionZero.classification`, `DimensionOne.table_isomorphic_iff`, and `DimensionOne.classification`; explicit target-field wrappers are compiled in `TargetFieldsZeroOne.lean`. The second row is certified by `DimensionTwoF2.table_multiplicationAssociative`, `DimensionTwoF2.table_isomorphic_iff`, and `DimensionTwoF2.classification`. The third row is certified independently for both fields in `DimensionTwoRealComplex.lean`, culminating in `DimensionTwo.Complex.classification` and `DimensionTwo.Real.classification`. “Passed” applies only to those rows and does not weaken the repository-wide completion flags.
 
 ## Per-candidate evidence card
 
