@@ -385,6 +385,156 @@
         "limitations": ["The paper's main topic is DG free algebras, not a complete low-dimensional associative-algebra classification."],
         "license_note": "Metadata only is committed; PDF remains local and ignored."
       }
+    },
+    "On the variety of two dimensional real associative algebras": {
+      "status": "already_downloaded",
+      "authors": ["J. M. Ancochea Bermudez", "J. Fresan", "J. Sanchez Hernandez"],
+      "arxiv_id": "0707.1076v3",
+      "doi": "10.12988/ijcms.2007.07134",
+      "version_date": "2007-10-12",
+      "subject": "Complete list of two-dimensional real associative algebras",
+      "source_url": "https://arxiv.org/abs/0707.1076",
+      "local_path": "CodexAIGC.references/pdfs/0707_1076v3_Ancochea-Fresan-Sanchez_Real-2D.pdf",
+      "sha256": "0d50404bb0ca51fdfb6d0a34aa0eddc3352035993e643dc00a8657a9d7f9477a",
+      "attempts": ["2026-09-02: downloaded arXiv v3 PDF; SHA-256 recorded; text extracted; Theorem 2 rendered and visually checked"],
+      "found_from": ["arXiv exact-scope search", "publisher article page"],
+      "cited_by": [],
+      "related": "Provides seven nonzero real representatives; adjoining the zero algebra gives the expected eight candidates, but its simplicity claim is incorrect.",
+      "scope_tags": {
+        "fields": ["Real"],
+        "characteristics": ["0"],
+        "unitality": "unital and nonunital",
+        "dimensions": [2],
+        "equivalence_relation": "real algebra isomorphism"
+      },
+      "publication": {"venue": "International Journal of Contemporary Mathematical Sciences", "year": 2007, "pages": "1293-1305"},
+      "index_verification": {
+        "crossref": null,
+        "openalex": null,
+        "semantic_scholar": null
+      },
+      "trust_chain": {
+        "acquired": true,
+        "integrity_verified": true,
+        "extracted": true,
+        "visually_checked": true,
+        "verified_against_original": false,
+        "method": "SHA-256, pdftotext, rendered-page inspection",
+        "description_source": "original arXiv PDF and original publisher article page"
+      },
+      "audit": {
+        "metadata_verified": true,
+        "classification_claim_verified": false,
+        "disposition": "candidate_tables_only; theorem proof and uniqueness require independent reconstruction",
+        "provisional_quality": "C because a concrete invariant claim is false",
+        "known_errors": [
+          "Theorem 2 says beta_2 is the unique simple algebra, but beta_2 has e_2^2=e_1 and is isomorphic to R x R, hence is not simple.",
+          "The simple representative is beta_1, the real algebra C; the following complexification remark is consistent with beta_1 and beta_2 having been swapped in the simplicity sentence."
+        ],
+        "limitations": ["The displayed classification omits the zero multiplication as a 'non-Abelian' or nontrivial case; it must be added explicitly."],
+        "license_note": "Metadata only is committed; PDF remains local and ignored."
+      }
+    },
+    "Complete Classification of Two-Dimensional Algebras": {
+      "status": "already_downloaded",
+      "authors": ["H. Ahmed", "U. Bekbaev", "I. Rakhimov"],
+      "arxiv_id": "1702.08616v2",
+      "doi": "10.1063/1.4980965",
+      "version_date": "2018-12-03",
+      "subject": "All two-dimensional algebras over algebraically closed fields, with characteristic cases",
+      "source_url": "https://arxiv.org/abs/1702.08616",
+      "local_path": "CodexAIGC.references/pdfs/1702_08616v2_Ahmed-Bekbaev-Rakhimov_All-2D.pdf",
+      "sha256": "69c77e07fdf8afee4da8b43958cac08eeb6a8a81cfbcaa7da6a96d4b7f3ea8bb",
+      "attempts": ["2026-09-02: downloaded corrected arXiv v2 PDF; SHA-256 recorded; text extracted; characteristic-two theorem page rendered and visually checked"],
+      "found_from": ["arXiv citation trail", "related-paper search"],
+      "cited_by": [],
+      "related": "A broad ambient classification from which associative candidates may be filtered, but it is not by itself an associative-classification proof.",
+      "scope_tags": {
+        "fields": ["Complex", "algebraically closed fields"],
+        "characteristics": ["not 2 or 3", "2", "3"],
+        "unitality": "unital and nonunital",
+        "dimensions": [2],
+        "equivalence_relation": "field-linear algebra isomorphism"
+      },
+      "publication": {"venue": "AIP Conference Proceedings", "year": 2017, "pages": "070016"},
+      "index_verification": {
+        "crossref": "DOI linked by the original arXiv record",
+        "openalex": null,
+        "semantic_scholar": null
+      },
+      "trust_chain": {
+        "acquired": true,
+        "integrity_verified": true,
+        "extracted": true,
+        "visually_checked": true,
+        "verified_against_original": false,
+        "method": "SHA-256, pdftotext, rendered-page inspection",
+        "description_source": "original corrected arXiv v2 PDF"
+      },
+      "audit": {
+        "metadata_verified": true,
+        "classification_claim_verified": false,
+        "disposition": "supporting_candidate_source_with_version_caution",
+        "provisional_quality": "C pending orbit and specialization audit",
+        "known_errors": ["The arXiv v2 notes that a type mistake in the A_{3,2}(c) family on page 7 was corrected."],
+        "limitations": [
+          "The main theorem assumes an algebraically closed field, so it does not classify real or F_2 algebras.",
+          "Associativity must be imposed and checked separately."
+        ],
+        "license_note": "Metadata only is committed; PDF remains local and ignored."
+      }
+    },
+    "Complete classification of two-dimensional associative and diassociative algebras over any basic field": {
+      "status": "already_downloaded",
+      "authors": ["I. S. Rakhimov"],
+      "arxiv_id": "2307.09927v1",
+      "doi": null,
+      "version_date": "2023-07-19",
+      "subject": "Two-dimensional associative and diassociative algebras over arbitrary fields",
+      "source_url": "https://arxiv.org/abs/2307.09927",
+      "local_path": "CodexAIGC.references/pdfs/2307_09927v1_Rakhimov_Associative-diassociative-2D.pdf",
+      "sha256": "76ef48cbdaa059ec6c8a4222e695ba0793e3a710c40e701a7aaa8947a0201f68",
+      "attempts": ["2026-09-02: downloaded arXiv v1 PDF; SHA-256 recorded; text extracted; Theorem 5 rendered and visually checked"],
+      "found_from": ["arXiv associative-algebra search", "citation trail from the ambient two-dimensional classification"],
+      "cited_by": [],
+      "related": "Useful candidate list and characteristic-two crosswalk; unsafe as a literal arbitrary-field unique classification.",
+      "scope_tags": {
+        "fields": ["Complex", "Real", "F_2", "arbitrary field"],
+        "characteristics": ["not 2 or 3", "2", "3"],
+        "unitality": "unital and nonunital",
+        "dimensions": [2],
+        "equivalence_relation": "field-linear algebra isomorphism with displayed parameter transformations"
+      },
+      "publication": {"venue": null, "year": 2023, "pages": null},
+      "index_verification": {
+        "crossref": null,
+        "openalex": null,
+        "semantic_scholar": null
+      },
+      "trust_chain": {
+        "acquired": true,
+        "integrity_verified": true,
+        "extracted": true,
+        "visually_checked": true,
+        "verified_against_original": false,
+        "method": "SHA-256, pdftotext, rendered-page inspection, explicit field-theoretic counterexample",
+        "description_source": "original arXiv v1 PDF"
+      },
+      "audit": {
+        "metadata_verified": true,
+        "classification_claim_verified": false,
+        "disposition": "quarantine_arbitrary_field_uniqueness_claim; candidate extraction only",
+        "provisional_quality": "D for arbitrary-field completeness as stated; useful as a candidate source",
+        "known_errors": [
+          "The text claims that over a perfect field every nonzero quadratic parameter can be normalized to 1. This is false: R is perfect but -1 is not a square.",
+          "The characteristic-not-2 parameter family is presented modulo square scaling without choosing or defining a square-class transversal, so the phrase 'only one' does not supply a unique normal-form index over an arbitrary field."
+        ],
+        "limitations": [
+          "The F_2 specialization must collapse the displayed parameter transformations explicitly; the Lean orbit certificate, not the paper, supplies uniqueness.",
+          "No journal DOI or independent corrected version was found in this pass."
+        ],
+        "license_note": "Metadata only is committed; PDF remains local and ignored."
+      }
     }
   }
 }

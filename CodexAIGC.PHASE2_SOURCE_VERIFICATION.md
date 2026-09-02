@@ -17,8 +17,11 @@ The purpose of this report is to prevent bibliographic confidence from being mis
 | [Fialowski–Penkava, nonnilpotent, arXiv:1309.6050](https://arxiv.org/abs/1309.6050), [DOI](https://doi.org/10.1515/forum-2012-0124) | nonnilpotent complex dimension four | priority family/orbit audit |
 | [Pellegrini, arXiv:1702.00143](https://arxiv.org/abs/1702.00143), [DOI](https://doi.org/10.1016/j.laa.2017.07.015) | nilpotent dimension four over finite, real, algebraically closed, and general fields | priority theorem/table audit |
 | [Mao–Xie–Yang–Abla, arXiv:1805.02001](https://arxiv.org/abs/1805.02001), [DOI](https://doi.org/10.1080/00927872.2019.1576187) | DG free algebras and a dual multiplication construction | rejected as classification authority for this project |
+| [Ancochea Bermudez–Fresan–Sanchez Hernandez, arXiv:0707.1076](https://arxiv.org/abs/0707.1076), [DOI](https://doi.org/10.12988/ijcms.2007.07134) | all nonzero two-dimensional real associative algebras | candidate tables only; reject its simplicity claim |
+| [Ahmed–Bekbaev–Rakhimov, arXiv:1702.08616v2](https://arxiv.org/abs/1702.08616), [DOI](https://doi.org/10.1063/1.4980965) | all two-dimensional algebras over algebraically closed fields | supporting candidate source; corrected-version caution |
+| [Rakhimov, arXiv:2307.09927](https://arxiv.org/abs/2307.09927) | associative and diassociative dimension two over claimed arbitrary fields | quarantine arbitrary-field uniqueness; useful characteristic-two crosswalk |
 
-All eight files were downloaded from arXiv, hashed, and text-extracted. Four representative PDFs also passed rendered-page visual inspection. None has yet been read cover-to-cover, so the machine-readable database deliberately uses `already_downloaded`, not `already_read`.
+All eleven files were downloaded from arXiv, hashed, and text-extracted. Seven representative PDFs also passed rendered-page visual inspection. None has yet been read cover-to-cover, so the machine-readable database deliberately uses `already_downloaded`, not `already_read`.
 
 ## Preliminary claim checks
 
@@ -63,6 +66,14 @@ e_y * e_x = 0.
 
 Thus the dual product is associative but noncommutative. Square-zero supplies the associativity identities; it does not supply cocommutativity of the coefficient tensor. Any classification argument in [Mao–Xie–Yang–Abla](https://arxiv.org/abs/1805.02001) that silently replaces “associative” by “commutative associative” is unusable here.
 
+### Two-dimensional source corrections
+
+The real two-dimensional paper lists seven nonzero pairwise nonisomorphic multiplication tables. They correspond to `C` viewed as a real algebra, `R × R`, the dual numbers, an idempotent plus an annihilator, the nilpotent chain, and the left- and right-identity noncommutative forms. Adding the zero multiplication yields eight candidates. However, its sentence “beta_2 is the unique simple algebra” is false: the displayed relation `e_2^2=e_1` makes `beta_2 ≅ R × R`. The simple real algebra in that pair is `beta_1 ≅ C`. The table list remains a candidate input; its invariant assertion is not trusted.
+
+The 2023 arbitrary-field paper gives useful characteristic-specific transformations, but its line claiming that every nonzero quadratic parameter can be normalized to `1` over a perfect field is false. The real field is perfect and has the nonsquare `-1`, which is exactly why the real list separates `C` from `R × R`. Moreover, a parameter listed only modulo multiplication by a nonzero square is not a unique normal form until a square-class quotient or transversal has been specified. Consequently the paper cannot certify arbitrary-field uniqueness as written.
+
+For `F_2`, the characteristic-two table in that paper is nevertheless a useful independent crosswalk: its parameter translations collapse to the same eight candidates already obtained by the repository's exhaustive Lean orbit certificate. This numerical agreement is a diagnostic only; the Lean computation remains the proof.
+
 ## Metadata-integrity incident
 
 Semantic Scholar returned the same paper identifier, `6890fe327d9fd62e44197f7e99abaf19d45db3a4`, for both arXiv identifiers `1309.5770` and `1309.6050`, and associated inconsistent arXiv metadata with it. The original arXiv records and Crossref DOIs show that these are two distinct papers: nilpotent and nonnilpotent. Consequently:
@@ -73,7 +84,7 @@ Semantic Scholar returned the same paper identifier, `6890fe327d9fd62e44197f7e99
 
 ## Quality and conflict checks
 
-- Six journal versions have exact DOI/title/author matches in Crossref.
+- Six journal versions have exact DOI/title/author matches in Crossref; two additional DOI identities are linked by an original publisher or arXiv record.
 - No retained source is accepted merely because it is peer reviewed; several papers themselves document errors in prior published classifications.
 - No obvious commercial conflict of interest is relevant to these pure-mathematics classifications.
 - A full venue/publisher-integrity audit is still pending for sources without a DOI or journal version.
@@ -81,5 +92,4 @@ Semantic Scholar returned the same paper identifier, `6890fe327d9fd62e44197f7e99
 
 ## Current verdict
 
-The literature base is sufficient to begin a rigorous nilpotent-sector extraction for all three fields and a complex nonnilpotent reconciliation. It is **not** sufficient to claim a complete real or `F_2` classification, and none of the eight sources has passed all four verification gates. The repository therefore keeps all completion booleans set to `false`.
-
+The literature base is sufficient to begin a rigorous nilpotent-sector extraction for all three fields, a complex nonnilpotent reconciliation, and an independent proof of the real/complex dimension-two slice. It is **not** sufficient to claim a complete real or `F_2` classification through dimension four, and none of the eleven sources has passed all four verification gates. The repository therefore keeps all global completion booleans set to `false`.

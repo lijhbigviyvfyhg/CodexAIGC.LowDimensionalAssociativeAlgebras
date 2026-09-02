@@ -35,6 +35,10 @@ The initial discovery pass used the following English queries and close punctuat
 12. `"order 16" associative rings classification`
 13. forward/backward citation searches from arXiv identifiers `0910.0932`, `1009.5339`, `1309.5770`, `1309.6050`, and `1702.00143`;
 14. exact-title DOI searches for each journal-published candidate.
+15. `"two dimensional real associative algebras" classification`
+16. `"two-dimensional associative algebras" arbitrary field characteristic 2`
+17. forward/backward searches from arXiv identifiers `0707.1076`, `1702.08616`, and `2307.09927`;
+18. `rings of order 8 classification additive group C_2^3` and convention checks distinguishing rings from `F_2`-algebras.
 
 Future passes must add searches in French, German, and Russian transliteration, and must explicitly search monographs, theses, Zentralblatt/MathSciNet-style bibliographies where accessible, and small-ring computational catalogues.
 
@@ -53,12 +57,12 @@ Exclude it as a classification authority when it only treats Lie, Jordan, Noviko
 ## Initial screening flow
 
 - Search hits screened: not consistently counted in the exploratory pass; no fabricated total is reported.
-- Primary PDFs retained locally: **8**.
-- PDFs with SHA-256 and text extraction: **8**.
+- Primary PDFs retained locally: **11**.
+- PDFs with SHA-256 and text extraction: **11**.
 - PDFs fully read cover-to-cover: **0**.
 - Journal DOI identities independently matched through Crossref: **6**.
 - Sources currently accepted as a verified complete classification: **0**.
-- Sources quarantined or rejected for the relevant completeness claim: **2**.
+- Sources quarantined or rejected for the relevant completeness claim: **3**.
 
 The exact per-paper status and provenance are in [`CodexAIGC.LITERATURE.json`](./CodexAIGC.LITERATURE.json). Downloaded PDFs and extracted text are intentionally Git-ignored.
 
@@ -69,7 +73,10 @@ The exact per-paper status and provenance are in [`CodexAIGC.LITERATURE.json`](.
 | `Complex`, dimension 4 | de Graaf; Pellegrini; Fialowski–Penkava | Fialowski–Penkava; broad Rakhimov table | promising overlap, but normal forms and parameter quotients are unreconciled |
 | `Real`, dimension 4 | de Graaf; Pellegrini | no sufficiently broad primary classification yet retained | major gap |
 | `F_2`, dimension 4 | de Graaf; Pellegrini | no complete field-specific primary classification yet retained | major gap; finite exhaustive computation is planned |
-| dimensions `0..3` | partially embedded in broad/arbitrary-field sources | partially embedded in broad complex sources | must be extracted and proved separately, not inferred from dimension 4 |
+| `Real`, dimension 2 | Ancochea Bermudez–Fresan–Sanchez Hernandez; Rakhimov | same sources | eight candidate tables identified; paper errors require an independent Lean proof |
+| `Complex`, dimension 2 | Ahmed–Bekbaev–Rakhimov; Rakhimov; broad Rakhimov table | same sources | seven candidates expected after complex square-class collapse; proof pending |
+| `F_2`, dimension 2 | Rakhimov characteristic-two table | same source | independently crosschecked against the completed Lean certificate of 8 orbits |
+| dimensions `0..3` beyond the verified slices | partially embedded in broad/arbitrary-field sources | partially embedded in broad complex sources | must be extracted and proved separately, not inferred from dimension 4 |
 
 The raw space of bilinear products on a four-dimensional `F_2` vector space has `2^(4^3) = 2^64` structure-constant tables. Exhaustive certification therefore needs associativity constraint pruning and `GL(4,2)` orbit reduction, not an unstructured scan.
 
@@ -80,6 +87,8 @@ The raw space of bilinear products on a four-dimensional `F_2` vector space has 
 - Terminology varies: “algebra” may silently mean unital, commutative, indecomposable, or algebraically closed base field.
 - A paper's finite number of named families need not mean a finite number of isomorphism classes; projective parameters and group actions must be formalized.
 - Small-ring catalogues may contain the required `F_2` cases, but their exact axioms and equivalence conventions must be checked before use.
+- Counts of all rings of order `8` cannot be imported as the three-dimensional `F_2` answer: they also include additive groups `C_8` and `C_4 × C_2`, and published ring conventions may require a unit.
+- “Perfect field” does not imply that every nonzero element is a square; parameter normalizations must use the actual square-class quotient.
 
 ## Next search actions
 
@@ -88,4 +97,3 @@ The raw space of bilinear products on a four-dimensional `F_2` vector space has 
 3. Trace corrections and citations to the complex Fialowski–Penkava families and reconcile them with independent multiplication tables.
 4. Retrieve historical sources only when needed to resolve a concrete discrepancy; never inherit their tables without rechecking associativity.
 5. Start theorem/table-level reading of de Graaf and Pellegrini, recording every characteristic hypothesis and parameter transversal.
-
