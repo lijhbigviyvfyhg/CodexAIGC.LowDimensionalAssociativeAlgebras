@@ -23,6 +23,8 @@ Dimension two over `ℂ` and `ℝ` is now complete as well. There are exactly se
 
 Dimension three over `𝔽₂` is complete. The reproducible enumeration produces 1688 accepted associative table codes among all `2^27 = 134217728` bilinear tables. Lean proves that every accepted entry is associative, reconstructs an LRAT certificate forcing every associative bit assignment into those entries, checks an explicit invertible change of basis for every entry, and proves that there are exactly 28 `GL(3,2)` isomorphism classes by invariant separation and unique coverage. See [`DimensionThreeF2.lean`](./CodexAIGC/Classification/DimensionThreeF2.lean) and the [certificate and normal-form evidence report](./CodexAIGC.EVIDENCE_F2_DIMENSION_3.md).
 
+The real/complex dimension-three track has reached a candidate-audit milestone, not a classification theorem. Lean now checks associativity of the 23 isolated 2019 tables, both parameter families, and the three extra real forms; it also proves the displayed `k ~ -k` basis changes. A second module literally transcribes the 21 isolated Fialowski--Penkava tables, proves an explicit isomorphism for every entry into the 2019 presentation, verifies the projective scaling/swap and several special fibres of `d22(x:y)`, and proves that the older displayed list omits zero multiplication. Completeness, the converse parameter criterion, and pairwise separation remain open. See the [dimension-three source crosswalk](./CodexAIGC.DIMENSION_3_SOURCE_CROSSWALK.md).
+
 ## Build
 
 ```text
@@ -44,6 +46,8 @@ Downloaded papers are kept locally under `CodexAIGC.references/pdfs/` and are ig
 已确认的范围分为三条独立轨道：复数 `ℂ`、实数 `ℝ` 和二元域 `𝔽₂`（Lean 中使用 `ZMod 2`）；维数包含 `0,1,2,3,4`。主分类不预设单位元；单位性与交换性作为经证明的标签及子分类记录。三个底域上的分类结论不互相沿用，每条轨道都需要独立的完整性与唯一性证明。
 
 当前已在任意域上完整证明维数 0 与维数 1 的分类，因此三条目标域轨道均已覆盖这两个维数。零维只有一个同构类；一维恰有零乘法与 `e * e = e` 两个同构类。二维也已在三条轨道上完成：`ℂ` 上恰有 7 类，`ℝ` 上恰有 8 类；`𝔽₂` 上 256 张双线性乘法表中 28 张满足结合律，组成恰好 8 个 `GL(2,2)` 同构轨道。`𝔽₂` 三维的可复现枚举产生 1688 个结合表条目；Lean 证明这些条目确实结合，用 LRAT 证书覆盖全部结合表，再用显式换基与同构不变量证明恰有 28 个同构类及存在唯一分类。`ℂ`、`ℝ` 三维及全部四维仍未完成，仓库不作整体完整性声明。
+
+`ℂ/ℝ` 三维目前只完成候选审计里程碑：Lean 已逐表验证 2019 候选的结合律、参数 `k ~ -k` 的显式同构，并把 Fialowski--Penkava 的 21 个固定表逐一换基到该候选框架；同时形式化确认旧表遗漏了零乘法。一般参数纤维、两两不同构与完整覆盖尚未证明，详见[三维来源交叉核对](./CodexAIGC.DIMENSION_3_SOURCE_CROSSWALK.md)。
 
 ## License
 

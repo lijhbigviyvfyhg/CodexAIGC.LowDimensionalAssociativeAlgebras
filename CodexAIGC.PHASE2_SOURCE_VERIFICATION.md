@@ -86,6 +86,26 @@ unital, curled, straight, and waved sectors and use a parameter `k` modulo sign.
 Neither count or notation is imported until every special fibre and basis change
 has an explicit crosswalk.
 
+Rendered inspection of Fialowski--Penkava Table 2 found two concrete hazards.
+First, PDF text extraction reverses or flattens the upper/lower indices in symbols
+of the form `psi_k^{ij}`; a naive OCR transcription of `d2` is nonassociative.
+The repository therefore transcribes products from the rendered page and checks
+the resulting multiplication in Lean. Second, the displayed list consists of 21
+isolated nonzero tables and the projective family `d22(x:y)`, whose coordinate
+pair excludes `(0,0)`. It does not display the zero multiplication algebra. Lean
+now proves that every isolated table is nonzero and that `d22(x:y)` is zero only
+at the forbidden pair `(0,0)`, so this is a mathematical omission rather than a
+counting convention silently repaired by the parameter family.
+
+The isolated-source crosswalk has now passed a stronger check than numerical
+matching. For every `d1` through `d21`, Lean verifies an explicit invertible
+multiplicative linear map to the 2019 table shown in
+[`CodexAIGC.DIMENSION_3_SOURCE_CROSSWALK.md`](./CodexAIGC.DIMENSION_3_SOURCE_CROSSWALK.md).
+For `d22`, Lean currently verifies projective rescaling, coordinate swap, both
+rank-one boundary points, and the alternating point. The general nondegenerate
+parameter formula and its converse remain open, so this crosswalk is not yet a
+completeness or nonredundancy proof.
+
 Version 6 of Bekbaev–Rakhimov goes further and says on page 11 that three unital
 complex tables must be added to the five in the 2019 list. Rendered inspection of
 pages 6 and 11 confirms the matrix entries and the claim. Direct calculation in
