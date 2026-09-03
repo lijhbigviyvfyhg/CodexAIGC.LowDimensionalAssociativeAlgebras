@@ -1,7 +1,7 @@
 # Phase 2 literature-search log
 
 **Status:** `IN_PROGRESS`  
-**Search date:** 2026-09-02  
+**Search dates:** 2026-09-02 to 2026-09-03
 **Target:** associative algebras over `Complex`, `Real`, and `F_2`, dimensions `0..4`, without assuming a unit.
 
 This is a reproducibility log, not a claim that the literature search is complete. Search results are treated as leads; only original papers, publisher records, and independently checked mathematics can support classification claims.
@@ -39,6 +39,9 @@ The initial discovery pass used the following English queries and close punctuat
 16. `"two-dimensional associative algebras" arbitrary field characteristic 2`
 17. forward/backward searches from arXiv identifiers `0707.1076`, `1702.08616`, and `2307.09927`;
 18. `rings of order 8 classification additive group C_2^3` and convention checks distinguishing rings from `F_2`-algebras.
+19. `three-dimensional associative algebras classification real complex` and exact-title searches for arXiv `1903.01623`;
+20. `moduli space 3-dimensional associative algebras Fialowski Penkava` and exact arXiv `0807.3178`;
+21. current-version and submission-history audit of arXiv `2508.04104`, followed by table-level checks of its claimed extra complex classes.
 
 Future passes must add searches in French, German, and Russian transliteration, and must explicitly search monographs, theses, Zentralblatt/MathSciNet-style bibliographies where accessible, and small-ring computational catalogues.
 
@@ -57,12 +60,12 @@ Exclude it as a classification authority when it only treats Lie, Jordan, Noviko
 ## Initial screening flow
 
 - Search hits screened: not consistently counted in the exploratory pass; no fabricated total is reported.
-- Primary PDFs retained locally: **11**.
-- PDFs with SHA-256 and text extraction: **11**.
+- Primary PDFs retained locally: **14**.
+- PDFs with SHA-256 and text extraction: **14**.
 - PDFs fully read cover-to-cover: **0**.
 - Journal DOI identities independently matched through Crossref: **6**.
 - Sources currently accepted as a verified complete classification: **0**.
-- Sources quarantined or rejected for the relevant completeness claim: **3**.
+- Sources quarantined or rejected for the relevant completeness claim: **4**.
 
 The exact per-paper status and provenance are in [`CodexAIGC.LITERATURE.json`](./CodexAIGC.LITERATURE.json). Downloaded PDFs and extracted text are intentionally Git-ignored.
 
@@ -76,7 +79,10 @@ The exact per-paper status and provenance are in [`CodexAIGC.LITERATURE.json`](.
 | `Real`, dimension 2 | Ancochea Bermudez–Fresan–Sanchez Hernandez; Rakhimov | same sources | eight candidate tables identified; paper errors require an independent Lean proof |
 | `Complex`, dimension 2 | Ahmed–Bekbaev–Rakhimov; Rakhimov; broad Rakhimov table | same sources | seven candidates expected after complex square-class collapse; proof pending |
 | `F_2`, dimension 2 | Rakhimov characteristic-two table | same source | independently crosschecked against the completed Lean certificate of 8 orbits |
-| dimensions `0..3` beyond the verified slices | partially embedded in broad/arbitrary-field sources | partially embedded in broad complex sources | must be extracted and proved separately, not inferred from dimension 4 |
+| `Complex`, dimension 3 | Fialowski–Penkava; Kobayashi–Shirayanagi–Takahasi–Tsukada; competing Bekbaev–Rakhimov list | same sources | conflicting presentations retained; three claimed extra unital classes in the newest list are explicit duplicates |
+| `Real`, dimension 3 | Kobayashi–Shirayanagi–Takahasi–Tsukada; competing Bekbaev–Rakhimov list | same sources | candidate lists found; field-specific parameter and completeness proof pending |
+| `F_2`, dimension 3 | literature not used as proof input | literature not used as proof input | complete Lean classification: 1688 accepted associative entries cover every table, with exactly 28 isomorphism classes |
+| dimensions `0..2` | field-specific sources above | field-specific sources above | all three target-field tracks complete in Lean |
 
 The raw space of bilinear products on a four-dimensional `F_2` vector space has `2^(4^3) = 2^64` structure-constant tables. Exhaustive certification therefore needs associativity constraint pruning and `GL(4,2)` orbit reduction, not an unstructured scan.
 
@@ -92,8 +98,9 @@ The raw space of bilinear products on a four-dimensional `F_2` vector space has 
 
 ## Next search actions
 
-1. Locate and audit real nonnilpotent classifications, including exact unitality and decomposability scope.
-2. Locate finite-ring/order-16 primary catalogues and isolate precisely the rings whose additive group is `F_2^n` and multiplication is `F_2`-bilinear.
-3. Trace corrections and citations to the complex Fialowski–Penkava families and reconcile them with independent multiplication tables.
-4. Retrieve historical sources only when needed to resolve a concrete discrepancy; never inherit their tables without rechecking associativity.
-5. Start theorem/table-level reading of de Graaf and Pellegrini, recording every characteristic hypothesis and parameter transversal.
+1. Complete the table-by-table crosswalk between arXiv `1903.01623` and `0807.3178`, proving every parameter identification and special fibre rather than trusting either list.
+2. Locate and audit further real nonnilpotent classifications, including exact unitality and decomposability scope.
+3. Locate finite-ring/order-16 primary catalogues and isolate precisely the rings whose additive group is `F_2^n` and multiplication is `F_2`-bilinear.
+4. Trace corrections and citations to the complex Fialowski–Penkava families and reconcile them with independent multiplication tables.
+5. Retrieve historical sources only when needed to resolve a concrete discrepancy; never inherit their tables without rechecking associativity.
+6. Start theorem/table-level reading of de Graaf and Pellegrini, recording every characteristic hypothesis and parameter transversal.

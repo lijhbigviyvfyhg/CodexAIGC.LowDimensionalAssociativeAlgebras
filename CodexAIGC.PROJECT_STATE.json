@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "updated": "2026-09-02",
+  "updated": "2026-09-03",
   "phase": 3,
   "status": "incremental_formalization_and_literature_audit",
   "environment": {
@@ -26,7 +26,7 @@
   "verified_slices": {
     "Complex": [0, 1, 2],
     "Real": [0, 1, 2],
-    "F_2": [0, 1, 2]
+    "F_2": [0, 1, 2, 3]
   },
   "finite_certificates": {
     "F_2_dimension_2": {
@@ -35,6 +35,31 @@
       "change_of_basis_group_order": 6,
       "isomorphism_orbits": 8,
       "kernel_decide": true,
+      "native_decide": false
+    },
+    "F_2_dimension_3": {
+      "all_tables": 134217728,
+      "enumerated_associative_table_entries": 1688,
+      "change_of_basis_group_order": 168,
+      "change_of_basis_group_order_provenance": "generator_diagnostic",
+      "isomorphism_orbits": 28,
+      "coverage_method": "kernel_reconstructed_LRAT",
+      "cnf_variables": 651,
+      "cnf_clauses": 4716,
+      "lrat_lines": 4630,
+      "final_lrat_clause_id": 9346,
+      "explicit_change_of_basis_witnesses": 1688,
+      "all_entries_proved_associative": true,
+      "all_associative_tables_proved_covered": true,
+      "separate_exact_table_cardinality_theorem": false,
+      "separating_invariants": [
+        "idempotent_count",
+        "square_zero_count",
+        "left_multiplication_kernel_cardinality_profile"
+      ],
+      "cnf_sha256": "204e411bdc47115e2137ef4ce4f499082636cdf4ceb2f700f13e1ea48c629411",
+      "lrat_sha256": "8c0d5c0bc9c4c2e7e8a5f491c2bd7802d0b342524cbf14f717827e763f5658ab",
+      "kernel_checked": true,
       "native_decide": false
     }
   },
@@ -53,9 +78,9 @@
     }
   },
   "counts": {
-    "sources_found": 11,
-    "sources_downloaded": 11,
+    "sources_found": 14,
+    "sources_downloaded": 14,
     "sources_read": 0,
-    "normal_forms_verified": 26
+    "normal_forms_verified": 54
   }
 }

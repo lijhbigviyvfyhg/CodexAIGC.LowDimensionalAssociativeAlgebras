@@ -1,4 +1,4 @@
-import CodexAIGC.Foundations.TableIsomorphism
+import CodexAIGC.Foundations.BilinearTransport
 import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 import Mathlib.Algebra.GroupWithZero.Units.Fintype
 
@@ -27,9 +27,33 @@ def MatrixPreserves [Field K] (g : Matrix.GeneralLinearGroup (Fin n) K)
   ∀ x y, matrixLinearEquiv g (c.mul x y) =
     d.mul (matrixLinearEquiv g x) (matrixLinearEquiv g y)
 
+/-- The basis-only version of `MatrixPreserves`; bilinearity makes it equivalent and it is
+far cheaper to decide over finite fields. -/
+def MatrixBasisPreserves [Field K] (g : Matrix.GeneralLinearGroup (Fin n) K)
+    (c d : StructureConstants K n) : Prop :=
+  ∀ i j : Fin n,
+    matrixLinearEquiv g (c.mul (Pi.single i 1) (Pi.single j 1)) =
+      d.mul (matrixLinearEquiv g (Pi.single i 1))
+        (matrixLinearEquiv g (Pi.single j 1))
+
 /-- Existence of an invertible matrix preserving multiplication. -/
 def MatrixIsomorphic [Field K] (c d : StructureConstants K n) : Prop :=
   ∃ g : Matrix.GeneralLinearGroup (Fin n) K, MatrixPreserves g c d
+
+/-- Isomorphism witnessed by checking the multiplication only on basis vectors. -/
+def MatrixBasisIsomorphic [Field K] (c d : StructureConstants K n) : Prop :=
+  ∃ g : Matrix.GeneralLinearGroup (Fin n) K, MatrixBasisPreserves g c d
+
+/-- A linear map preserves a bilinear product everywhere exactly when it does so on the
+standard basis. -/
+theorem matrixPreserves_iff_matrixBasisPreserves [Field K]
+    (g : Matrix.GeneralLinearGroup (Fin n) K) (c d : StructureConstants K n) :
+    MatrixPreserves g c d ↔ MatrixBasisPreserves g c d := by
+  constructor
+  · intro h i j
+    exact h (Pi.single i 1) (Pi.single j 1)
+  · intro h
+    exact (TableEquiv.ofBasis (matrixLinearEquiv g) h).map_mul
 
 /-- The finite matrix predicate and semantic table isomorphism coincide. -/
 theorem matrixIsomorphic_iff_isomorphic [Field K]
@@ -50,10 +74,27 @@ theorem matrixIsomorphic_iff_isomorphic [Field K]
     rw [hg]
     exact e.map_mul x y
 
+/-- The optimized finite predicate still coincides with semantic table isomorphism. -/
+theorem matrixBasisIsomorphic_iff_isomorphic [Field K]
+    (c d : StructureConstants K n) : MatrixBasisIsomorphic c d ↔ Isomorphic c d := by
+  rw [← matrixIsomorphic_iff_isomorphic]
+  unfold MatrixBasisIsomorphic MatrixIsomorphic
+  constructor
+  · rintro ⟨g, hg⟩
+    exact ⟨g, (matrixPreserves_iff_matrixBasisPreserves g c d).mpr hg⟩
+  · rintro ⟨g, hg⟩
+    exact ⟨g, (matrixPreserves_iff_matrixBasisPreserves g c d).mp hg⟩
+
 instance [Field K] [Fintype K] [DecidableEq K]
     (g : Matrix.GeneralLinearGroup (Fin n) K) (c d : StructureConstants K n) :
     Decidable (MatrixPreserves g c d) := by
   unfold MatrixPreserves
+  infer_instance
+
+instance [Field K] [Fintype K] [DecidableEq K]
+    (g : Matrix.GeneralLinearGroup (Fin n) K) (c d : StructureConstants K n) :
+    Decidable (MatrixBasisPreserves g c d) := by
+  unfold MatrixBasisPreserves
   infer_instance
 
 instance [CommSemiring K] [Fintype K] [DecidableEq K] (c : StructureConstants K n) :
@@ -64,6 +105,11 @@ instance [CommSemiring K] [Fintype K] [DecidableEq K] (c : StructureConstants K 
 instance [Field K] [Fintype K] [DecidableEq K] (c d : StructureConstants K n) :
     Decidable (MatrixIsomorphic c d) := by
   unfold MatrixIsomorphic
+  infer_instance
+
+instance [Field K] [Fintype K] [DecidableEq K] (c d : StructureConstants K n) :
+    Decidable (MatrixBasisIsomorphic c d) := by
+  unfold MatrixBasisIsomorphic
   infer_instance
 
 end CodexAIGC.StructureConstants

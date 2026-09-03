@@ -1,6 +1,6 @@
 {
   "schema_version": "0.2.0",
-  "updated": "2026-09-02",
+  "updated": "2026-09-03",
   "papers": {
     "Complete lists of low dimensional complex associative algebras": {
       "status": "already_downloaded",
@@ -532,6 +532,160 @@
         "limitations": [
           "The F_2 specialization must collapse the displayed parameter transformations explicitly; the Lean orbit certificate, not the paper, supplies uniqueness.",
           "No journal DOI or independent corrected version was found in this pass."
+        ],
+        "license_note": "Metadata only is committed; PDF remains local and ignored."
+      }
+    },
+    "The moduli space of 3-dimensional associative algebras": {
+      "status": "already_downloaded",
+      "authors": ["Alice Fialowski", "Michael Penkava"],
+      "arxiv_id": "0807.3178v1",
+      "doi": null,
+      "version_date": "2008-07-20",
+      "subject": "Moduli-space classification of three-dimensional complex associative algebras",
+      "source_url": "https://arxiv.org/abs/0807.3178",
+      "local_path": "CodexAIGC.references/pdfs/0807_3178v1_Fialowski-Penkava_Complex-3D-moduli.pdf",
+      "sha256": "87d9ed6453098b8c653a0cd9a905261a6dfd8b3238deb9eea7daef04832c8335",
+      "attempts": ["2026-09-03: downloaded arXiv v1 PDF; SHA-256 recorded; text extracted; Table 2 rendered and visually checked"],
+      "found_from": ["arXiv exact-scope search", "citation trail from later three-dimensional classifications"],
+      "cited_by": [],
+      "related": "Independent complex dimension-three list in codifferential notation: 21 singleton strata and one parameter stratum d_22(x:y), with coordinate-swap identification. It requires a table-by-table basis crosswalk before use.",
+      "scope_tags": {
+        "fields": ["Complex"],
+        "characteristics": ["0"],
+        "unitality": "unital and nonunital",
+        "dimensions": [3],
+        "equivalence_relation": "complex algebra isomorphism with a projective parameter quotient"
+      },
+      "publication": {"venue": null, "year": 2008, "pages": null},
+      "index_verification": {
+        "crossref": null,
+        "openalex": null,
+        "semantic_scholar": null
+      },
+      "trust_chain": {
+        "acquired": true,
+        "integrity_verified": true,
+        "extracted": true,
+        "visually_checked": true,
+        "verified_against_original": false,
+        "method": "original arXiv record, SHA-256, pdftotext, rendered Table 2 inspection",
+        "description_source": "original arXiv v1 PDF"
+      },
+      "audit": {
+        "metadata_verified": true,
+        "classification_claim_verified": false,
+        "disposition": "priority_crosswalk_and_parameter_orbit_audit",
+        "provisional_quality": "B pending basis, special-fibre, and completeness reconstruction",
+        "known_errors": [],
+        "limitations": [
+          "The codifferential convention must be translated to the repository's multiplication-table convention.",
+          "Special points of the projective family and the coordinate-swap quotient must be reconciled explicitly with other lists.",
+          "The zero multiplication is not displayed in Table 2 and must be handled separately."
+        ],
+        "license_note": "Metadata only is committed; PDF remains local and ignored."
+      }
+    },
+    "A complete classification of three-dimensional algebras over R and C": {
+      "status": "already_downloaded",
+      "authors": ["Yuji Kobayashi", "Kiyoshi Shirayanagi", "Sin-Ei Takahasi", "Makoto Tsukada"],
+      "arxiv_id": "1903.01623v1",
+      "doi": null,
+      "version_date": "2019-03-05",
+      "subject": "Elementary classification of three-dimensional real and complex associative algebras",
+      "source_url": "https://arxiv.org/abs/1903.01623",
+      "local_path": "CodexAIGC.references/pdfs/1903_01623v1_Kobayashi-Shirayanagi-Takahasi-Tsukada_Real-Complex-3D.pdf",
+      "sha256": "b1ef08dbc89aeb86730fff0af634fa8e68323946c7a4246e954baa62cb271ec6",
+      "attempts": ["2026-09-03: downloaded arXiv v1 PDF; SHA-256 recorded; text extracted; summary tables on pages 31-32 rendered and visually checked"],
+      "found_from": ["arXiv exact-scope search", "citation trail from competing three-dimensional lists"],
+      "cited_by": [],
+      "related": "Principal candidate framework for the real and complex dimension-three tracks. It states five complex unital forms, five curled forms, four straight forms, nine isolated waved forms, and one waved parameter family modulo k ~ -k; the real list adds one form or family in three places.",
+      "scope_tags": {
+        "fields": ["Complex", "Real"],
+        "characteristics": ["0"],
+        "unitality": "unital and nonunital",
+        "dimensions": [3],
+        "equivalence_relation": "field-linear algebra isomorphism with explicit parameter transversals"
+      },
+      "publication": {"venue": null, "year": 2019, "pages": null},
+      "index_verification": {
+        "crossref": null,
+        "openalex": null,
+        "semantic_scholar": null
+      },
+      "trust_chain": {
+        "acquired": true,
+        "integrity_verified": true,
+        "extracted": true,
+        "visually_checked": true,
+        "verified_against_original": false,
+        "method": "original arXiv record, SHA-256, pdftotext, rendered summary-page inspection",
+        "description_source": "original arXiv v1 PDF"
+      },
+      "audit": {
+        "metadata_verified": true,
+        "classification_claim_verified": false,
+        "disposition": "priority_full_table_and_completeness_reconstruction",
+        "provisional_quality": "A for scope and explicit proof structure; theorem content still unverified",
+        "known_errors": [],
+        "limitations": [
+          "The analytic half-plane representative for k modulo sign is unsuitable as a direct Lean quotient and will be replaced by an algebraic invariant or quotient construction.",
+          "Its list must be reconciled with the different stratification and notation in arXiv:0807.3178 before any completeness claim is imported.",
+          "No paper assertion substitutes for Lean proofs of associativity, parameter uniqueness, separation, and coverage."
+        ],
+        "license_note": "Metadata only is committed; PDF remains local and ignored."
+      }
+    },
+    "On three-dimensional associative algebras": {
+      "status": "already_downloaded",
+      "authors": ["U. Bekbaev", "I. Rakhimov"],
+      "arxiv_id": "2508.04104v6",
+      "doi": null,
+      "version_date": "2026-06-10",
+      "subject": "Claimed classification of three-dimensional associative algebras in characteristic not two or three",
+      "source_url": "https://arxiv.org/abs/2508.04104",
+      "local_path": "CodexAIGC.references/pdfs/2508_04104v6_Bekbaev-Rakhimov_Three-dimensional.pdf",
+      "sha256": "a3cb2a7d2f45eabce0b93577c3c546bda0a2df2d8dea19eb2de1f6bab7f26976",
+      "attempts": ["2026-09-03: downloaded current arXiv v6 PDF; SHA-256 recorded; text extracted; pages 6 and 11-12 rendered and visually checked"],
+      "found_from": ["arXiv current classification search", "comparison discussion citing arXiv:1903.01623"],
+      "cited_by": [],
+      "related": "Recent competing list useful for finding candidate tables and explicit disagreements. Its claim of three additional complex unital isomorphism classes fails direct basis-change checks, so its completeness and nonredundancy claims are quarantined.",
+      "scope_tags": {
+        "fields": ["Complex", "Real", "general base field"],
+        "characteristics": ["not 2 or 3"],
+        "unitality": "unital and nonunital",
+        "dimensions": [3],
+        "equivalence_relation": "field-linear algebra isomorphism with parameter transformations"
+      },
+      "publication": {"venue": null, "year": 2026, "pages": null},
+      "index_verification": {
+        "crossref": null,
+        "openalex": null,
+        "semantic_scholar": null
+      },
+      "trust_chain": {
+        "acquired": true,
+        "integrity_verified": true,
+        "extracted": true,
+        "visually_checked": true,
+        "verified_against_original": false,
+        "method": "original arXiv v6 record, SHA-256, pdftotext, rendered-table inspection, direct symbolic basis-change checks",
+        "description_source": "original arXiv v6 PDF"
+      },
+      "audit": {
+        "metadata_verified": true,
+        "classification_claim_verified": false,
+        "disposition": "quarantine_completeness_and_nonredundancy_claims; candidate extraction only",
+        "provisional_quality": "D for classification reliability because displayed 'extra' classes are duplicates",
+        "known_errors": [
+          "Page 11 calls As^6_{1,1}(3)(-1) an extra complex unital class, but with unit e1 and r=e3-e1 its table has r^2=e2 and r^3=0, so it is C[r]/(r^3), one of the standard five unital classes.",
+          "Page 11 calls As^7_{1,1}(3)(-1) extra, but r=e3-e1 and e2 span a square-zero radical, so it is the standard local algebra C[x,y]/(x,y)^2.",
+          "Page 11 calls As^9_{1,1}(3)(1) extra, but p=(e1+e2)/2 and q=(e1-e2)/2, followed by diagonalising e3 inside pA, gives three orthogonal primitive idempotents; hence the algebra is C^3."
+        ],
+        "limitations": [
+          "The stated proof is a computational procedure description and does not publish the Maple elimination certificates needed to audit completeness.",
+          "The paper excludes characteristics two and three and therefore gives no evidence for the F_2 track.",
+          "Every remaining candidate and parameter equivalence requires independent Lean verification."
         ],
         "license_note": "Metadata only is committed; PDF remains local and ignored."
       }

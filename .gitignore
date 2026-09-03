@@ -5,6 +5,8 @@
 *.olean
 *.ilean
 *.trace
+__pycache__/
+*.pyc
 
 # Local credentials and editor state
 .env

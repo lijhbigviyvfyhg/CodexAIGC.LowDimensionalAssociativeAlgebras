@@ -154,8 +154,115 @@ def TableEquiv.ofBasis {a b : StructureConstants K n}
     have hk := congrArg (fun z ↦ z k) hv
     change a.coeff i j k = e.symm (b.mul (e (Pi.single i 1)) (e (Pi.single j 1))) k
     simpa only [e.symm_apply_apply, mul_basis] using hk
-  rw [ht]
-  exact pullbackTableEquiv b e
+  exact {
+    toLinearEquiv := e
+    map_mul' := by
+      intro x y
+      rw [ht, pullbackTable_mul]
+      simp
+  }
+
+private theorem sum_four_rotate {ι M : Type*} [Fintype ι] [AddCommMonoid M]
+    (f : ι → ι → ι → ι → M) :
+    (∑ a, ∑ b, ∑ i, ∑ j, f a b i j) =
+      ∑ i, ∑ j, ∑ b, ∑ a, f a b i j := by
+  calc
+    _ = ∑ ab : ι × ι, ∑ ij : ι × ι, f ab.1 ab.2 ij.1 ij.2 := by
+      simp only [Fintype.sum_prod_type]
+    _ = ∑ ij : ι × ι, ∑ ab : ι × ι, f ab.1 ab.2 ij.1 ij.2 := by
+      rw [Finset.sum_comm]
+    _ = ∑ i, ∑ j, ∑ a, ∑ b, f a b i j := by
+      simp only [Fintype.sum_prod_type]
+    _ = _ := by
+      apply Finset.sum_congr rfl
+      intro i _
+      apply Finset.sum_congr rfl
+      intro j _
+      rw [Finset.sum_comm]
+
+private theorem sum_three_rotate {ι M : Type*} [Fintype ι] [AddCommMonoid M]
+    (f : ι → ι → ι → M) :
+    (∑ a, ∑ i, ∑ j, f a i j) = ∑ i, ∑ j, ∑ a, f a i j := by
+  calc
+    _ = ∑ a, ∑ ij : ι × ι, f a ij.1 ij.2 := by
+      simp only [Fintype.sum_prod_type]
+    _ = ∑ ij : ι × ι, ∑ a, f a ij.1 ij.2 := by
+      rw [Finset.sum_comm]
+    _ = _ := by
+      simp only [Fintype.sum_prod_type]
+
+/-- The coordinate equations are equivalent to associativity of the induced multiplication.
+
+This theorem is dimension-independent. It lets finite certificate files reason only about
+the structure constants while the public classification theorem speaks about the actual
+bilinear multiplication. -/
+theorem isAssociative_iff_multiplicationAssociative (c : StructureConstants K n) :
+    c.IsAssociative ↔ c.MultiplicationAssociative := by
+  classical
+  constructor
+  · intro hc x y z
+    funext m
+    change
+      (∑ a, ∑ b, c.mul x y a * z b * c.coeff a b m) =
+        ∑ a, ∑ b, x a * c.mul y z b * c.coeff a b m
+    calc
+      _ = ∑ i, ∑ j, ∑ k,
+          x i * y j * z k * (∑ l, c.coeff i j l * c.coeff l k m) := by
+            simp only [mul]
+            simp only [Finset.sum_mul, Finset.mul_sum]
+            ring_nf
+            rw [sum_four_rotate]
+            apply Finset.sum_congr rfl
+            intro i _
+            apply Finset.sum_congr rfl
+            intro j _
+            apply Finset.sum_congr rfl
+            intro k _
+            apply Finset.sum_congr rfl
+            intro l _
+            ring
+      _ = ∑ i, ∑ j, ∑ k,
+          x i * y j * z k * (∑ l, c.coeff j k l * c.coeff i l m) := by
+            apply Finset.sum_congr rfl
+            intro i _
+            apply Finset.sum_congr rfl
+            intro j _
+            apply Finset.sum_congr rfl
+            intro k _
+            rw [hc i j k m]
+      _ = _ := by
+            simp only [mul]
+            simp only [Finset.sum_mul, Finset.mul_sum]
+            ring_nf
+            symm
+            apply Finset.sum_congr rfl
+            intro i _
+            exact sum_three_rotate
+              (fun l j k ↦ x i * y j * z k * c.coeff j k l * c.coeff i l m)
+  · intro hc i j k m
+    have h := congrFun (hc (Pi.single i 1) (Pi.single j 1) (Pi.single k 1)) m
+    simp only [mul_basis] at h
+    have hleft :
+        c.mul (fun l ↦ c.coeff i j l) (Pi.single k 1) m =
+          ∑ l, c.coeff i j l * c.coeff l k m := by
+      simp only [mul]
+      apply Finset.sum_congr rfl
+      intro l _
+      rw [Fintype.sum_eq_single k]
+      · simp
+      · intro k' hk'
+        simp [Pi.single_eq_of_ne hk']
+    have hright :
+        c.mul (Pi.single i 1) (fun l ↦ c.coeff j k l) m =
+          ∑ l, c.coeff j k l * c.coeff i l m := by
+      simp only [mul]
+      rw [Fintype.sum_eq_single i]
+      · simp
+      · intro i' hi'
+        simp [Pi.single_eq_of_ne hi']
+    rw [hleft] at h
+    rw [hright] at h
+    exact h
 
 section DimensionTwo
 

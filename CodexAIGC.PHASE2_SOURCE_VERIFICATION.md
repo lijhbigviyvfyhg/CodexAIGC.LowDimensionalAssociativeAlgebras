@@ -1,7 +1,7 @@
 # Phase 2 source-verification report
 
-**Status:** literature audit preliminary; the independent Lean classifications in dimensions zero through two are verified.
-**Date:** 2026-09-02
+**Status:** literature audit preliminary; the independent Lean classifications in dimensions zero through two, and over `F_2` in dimension three, are verified.
+**Date:** 2026-09-03
 
 The purpose of this report is to prevent bibliographic confidence from being mistaken for mathematical verification. “Metadata verified” means that title/authors/version/DOI were checked against original arXiv or publisher records. It does **not** mean that the multiplication tables, isomorphism criteria, or completeness proof have passed the project's four proof gates.
 
@@ -20,8 +20,11 @@ The purpose of this report is to prevent bibliographic confidence from being mis
 | [Ancochea Bermudez–Fresan–Sanchez Hernandez, arXiv:0707.1076](https://arxiv.org/abs/0707.1076), [DOI](https://doi.org/10.12988/ijcms.2007.07134) | all nonzero two-dimensional real associative algebras | candidate tables only; reject its simplicity claim |
 | [Ahmed–Bekbaev–Rakhimov, arXiv:1702.08616v2](https://arxiv.org/abs/1702.08616), [DOI](https://doi.org/10.1063/1.4980965) | all two-dimensional algebras over algebraically closed fields | supporting candidate source; corrected-version caution |
 | [Rakhimov, arXiv:2307.09927](https://arxiv.org/abs/2307.09927) | associative and diassociative dimension two over claimed arbitrary fields | quarantine arbitrary-field uniqueness; useful characteristic-two crosswalk |
+| [Fialowski–Penkava, arXiv:0807.3178](https://arxiv.org/abs/0807.3178) | complex dimension-three moduli space | priority basis and projective-parameter crosswalk |
+| [Kobayashi–Shirayanagi–Takahasi–Tsukada, arXiv:1903.01623](https://arxiv.org/abs/1903.01623) | complete real and complex dimension-three candidate lists | principal candidate framework; reconstruct all four gates independently |
+| [Bekbaev–Rakhimov, arXiv:2508.04104v6](https://arxiv.org/abs/2508.04104) | claimed characteristic-not-two-or-three dimension-three classification | quarantine completeness and nonredundancy; several advertised extra complex classes are duplicates |
 
-All eleven files were downloaded from arXiv, hashed, and text-extracted. Seven representative PDFs also passed rendered-page visual inspection. None has yet been read cover-to-cover, so the machine-readable database deliberately uses `already_downloaded`, not `already_read`.
+All fourteen files were downloaded from arXiv, hashed, and text-extracted. Ten representative PDFs also passed rendered-page visual inspection. None has yet been read cover-to-cover, so the machine-readable database deliberately uses `already_downloaded`, not `already_read`.
 
 ## Preliminary claim checks
 
@@ -74,6 +77,34 @@ The 2023 arbitrary-field paper gives useful characteristic-specific transformati
 
 For `F_2`, the characteristic-two table in that paper is nevertheless a useful independent crosswalk: its parameter translations collapse to the same eight candidates already obtained by the repository's exhaustive Lean orbit certificate. This numerical agreement is a diagnostic only; the Lean computation remains the proof.
 
+### Three-dimensional source conflict and a concrete 2026 correction
+
+The two older complex sources use very different presentations. Fialowski–Penkava
+give 21 singleton strata and a projective family `d_22(x:y)` modulo coordinate
+swap, while Kobayashi–Shirayanagi–Takahasi–Tsukada organize the tables into
+unital, curled, straight, and waved sectors and use a parameter `k` modulo sign.
+Neither count or notation is imported until every special fibre and basis change
+has an explicit crosswalk.
+
+Version 6 of Bekbaev–Rakhimov goes further and says on page 11 that three unital
+complex tables must be added to the five in the 2019 list. Rendered inspection of
+pages 6 and 11 confirms the matrix entries and the claim. Direct calculation in
+the paper's basis `(e1,e2,e3)` shows that all three are old classes:
+
+- in `As^6_{1,1}(3)(-1)`, `e1` is the unit and `r=e3-e1` satisfies
+  `r^2=e2`, `r^3=0`; the algebra is `C[r]/(r^3)`;
+- in `As^7_{1,1}(3)(-1)`, `r=e3-e1` and `e2` span a square-zero
+  radical; the algebra is `C[x,y]/(x,y)^2`;
+- in `As^9_{1,1}(3)(1)`, set `p=(e1+e2)/2` and `q=(e1-e2)/2`.
+  Then `p,q` are orthogonal idempotents, `q*e3=0`, and `e3^2=2p`.
+  Diagonalising `e3` inside `pA` gives three orthogonal primitive
+  idempotents, hence the algebra is `C^3`.
+
+Thus the paper's advertised nonredundancy already fails in the unital sector.
+Its remaining tables may still be useful candidates, but its classification
+claim is quarantined. These calculations will be converted to explicit Lean
+isomorphisms as part of the complex dimension-three track.
+
 ## Metadata-integrity incident
 
 Semantic Scholar returned the same paper identifier, `6890fe327d9fd62e44197f7e99abaf19d45db3a4`, for both arXiv identifiers `1309.5770` and `1309.6050`, and associated inconsistent arXiv metadata with it. The original arXiv records and Crossref DOIs show that these are two distinct papers: nilpotent and nonnilpotent. Consequently:
@@ -92,4 +123,4 @@ Semantic Scholar returned the same paper identifier, `6890fe327d9fd62e44197f7e99
 
 ## Current verdict
 
-The literature base is sufficient to begin a rigorous nilpotent-sector extraction for all three fields and a complex nonnilpotent reconciliation. The real/complex dimension-two slice has now been reconstructed independently and certified in Lean; this verifies the mathematical slice, not every assertion in its source papers. The literature is **not** sufficient to claim a complete real or `F_2` classification through dimension four, and no source is accepted as a proof authority. The repository therefore keeps all global completion booleans set to `false`.
+The literature base is sufficient to begin a rigorous nilpotent-sector extraction for all three fields and a real/complex dimension-three reconciliation. The real/complex dimension-two slice and the finite `F_2` dimension-three slice have now been reconstructed independently and certified in Lean; this verifies those mathematical slices, not every assertion in their source papers. The literature is **not** sufficient to claim a complete real or complex classification in dimension three, or any dimension-four track, and no source is accepted as a proof authority. The repository therefore keeps all global completion booleans set to `false`.
