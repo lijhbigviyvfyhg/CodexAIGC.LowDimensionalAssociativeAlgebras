@@ -98,7 +98,7 @@ The raw space of bilinear products on a four-dimensional `F_2` vector space has 
 
 ## Next search actions
 
-1. Complete the remaining nondegenerate `d22(x:y)` parameter crosswalk between arXiv `1903.01623` and `0807.3178`; the 21 isolated tables, projective scaling/swap, rank-one boundary, and alternating fibre now have explicit Lean equivalences.
+1. Reconstruct the structural completeness proof and separate every fixed table from every other fixed table and parameter fibre; the full `d1,...,d22` source crosswalk and both waved-family parameter quotients now have explicit Lean proofs.
 2. Locate and audit further real nonnilpotent classifications, including exact unitality and decomposability scope.
 3. Locate finite-ring/order-16 primary catalogues and isolate precisely the rings whose additive group is `F_2^n` and multiplication is `F_2`-bilinear.
 4. Trace corrections and citations to the complex Fialowski–Penkava families and reconcile them with independent multiplication tables.

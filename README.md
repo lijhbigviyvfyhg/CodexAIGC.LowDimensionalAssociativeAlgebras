@@ -23,7 +23,7 @@ Dimension two over `ℂ` and `ℝ` is now complete as well. There are exactly se
 
 Dimension three over `𝔽₂` is complete. The reproducible enumeration produces 1688 accepted associative table codes among all `2^27 = 134217728` bilinear tables. Lean proves that every accepted entry is associative, reconstructs an LRAT certificate forcing every associative bit assignment into those entries, checks an explicit invertible change of basis for every entry, and proves that there are exactly 28 `GL(3,2)` isomorphism classes by invariant separation and unique coverage. See [`DimensionThreeF2.lean`](./CodexAIGC/Classification/DimensionThreeF2.lean) and the [certificate and normal-form evidence report](./CodexAIGC.EVIDENCE_F2_DIMENSION_3.md).
 
-The real/complex dimension-three track has reached a candidate-audit milestone, not a classification theorem. Lean now checks associativity of the 23 isolated 2019 tables, both parameter families, and the three extra real forms; it also proves the displayed `k ~ -k` basis changes. A second module literally transcribes the 21 isolated Fialowski--Penkava tables, proves an explicit isomorphism for every entry into the 2019 presentation, verifies the projective scaling/swap and several special fibres of `d22(x:y)`, and proves that the older displayed list omits zero multiplication. Completeness, the converse parameter criterion, and pairwise separation remain open. See the [dimension-three source crosswalk](./CodexAIGC.DIMENSION_3_SOURCE_CROSSWALK.md).
+The real/complex dimension-three track has reached a candidate-audit milestone, not a classification theorem. Lean now checks associativity of the 23 isolated 2019 tables, both parameter families, and the three extra real forms. It proves that each waved family is parameterized exactly modulo `k ~ -k`, and over `ℝ` proves the ordinary and minus families disjoint. A second module literally transcribes the 21 isolated Fialowski--Penkava tables, proves an explicit isomorphism for every entry into the 2019 presentation, verifies every projective fibre of `d22(x:y)` over algebraically closed fields and over `ℝ`, and proves that the older displayed list omits zero multiplication. Global pairwise separation and an independent completeness proof remain open. See the [dimension-three source crosswalk](./CodexAIGC.DIMENSION_3_SOURCE_CROSSWALK.md).
 
 ## Build
 
@@ -47,7 +47,7 @@ Downloaded papers are kept locally under `CodexAIGC.references/pdfs/` and are ig
 
 当前已在任意域上完整证明维数 0 与维数 1 的分类，因此三条目标域轨道均已覆盖这两个维数。零维只有一个同构类；一维恰有零乘法与 `e * e = e` 两个同构类。二维也已在三条轨道上完成：`ℂ` 上恰有 7 类，`ℝ` 上恰有 8 类；`𝔽₂` 上 256 张双线性乘法表中 28 张满足结合律，组成恰好 8 个 `GL(2,2)` 同构轨道。`𝔽₂` 三维的可复现枚举产生 1688 个结合表条目；Lean 证明这些条目确实结合，用 LRAT 证书覆盖全部结合表，再用显式换基与同构不变量证明恰有 28 个同构类及存在唯一分类。`ℂ`、`ℝ` 三维及全部四维仍未完成，仓库不作整体完整性声明。
 
-`ℂ/ℝ` 三维目前只完成候选审计里程碑：Lean 已逐表验证 2019 候选的结合律、参数 `k ~ -k` 的显式同构，并把 Fialowski--Penkava 的 21 个固定表逐一换基到该候选框架；同时形式化确认旧表遗漏了零乘法。一般参数纤维、两两不同构与完整覆盖尚未证明，详见[三维来源交叉核对](./CodexAIGC.DIMENSION_3_SOURCE_CROSSWALK.md)。
+`ℂ/ℝ` 三维目前只完成候选审计里程碑：Lean 已逐表验证 2019 候选的结合律，证明两个参数族都恰好按 `k ~ -k` 取商，并在实数上证明正、负号参数族互不相交；Fialowski--Penkava 的 21 个固定表及 `d22(x:y)` 的全部射影纤维也已显式换基到该候选框架，同时形式化确认旧表遗漏了零乘法。固定表与各族之间的全局两两不同构、以及对任意三维代数的独立完整覆盖仍未证明，详见[三维来源交叉核对](./CodexAIGC.DIMENSION_3_SOURCE_CROSSWALK.md)。
 
 ## License
 

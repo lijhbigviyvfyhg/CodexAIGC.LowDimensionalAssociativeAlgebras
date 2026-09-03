@@ -1,4 +1,7 @@
 import CodexAIGC.Classification.DimensionThreeRealComplexCandidates
+import Mathlib.Analysis.Real.Sqrt
+import Mathlib.FieldTheory.IsAlgClosed.Basic
+import Mathlib.Tactic.LinearCombination
 
 /-!
 # Crosswalk for two dimension-three source presentations
@@ -222,6 +225,29 @@ private def familyAlternatingBasisChange (x : K) (hx : x ≠ 0) :
     (by intro v; apply funext_three <;> simp [matrixLinearMap, hx])
     (by intro v; apply funext_three <;> simp [matrixLinearMap, hx])
 
+/-- The basis used to identify a nondegenerate, nonalternating `d22` fibre with
+the ordinary waved family.  From waved coordinates it sends
+`e0 ↦ (x+y)e2`, `e1 ↦ e0+e1`, and `e2 ↦ t(x e0-y e1)`. -/
+private def wavedToFamilyBasisChange (x y t : K) (ht : t ≠ 0)
+    (hsum : x + y ≠ 0) : V K ≃ₗ[K] V K :=
+  linearEquivOfInverse
+    (matrixLinearMap 0 1 (t * x) 0 1 (-t * y) (x + y) 0 0)
+    (matrixLinearMap 0 0 (x + y)⁻¹
+      (y * (x + y)⁻¹) (x * (x + y)⁻¹) 0
+      (t * (x + y))⁻¹ (-(t * (x + y))⁻¹) 0)
+    (by
+      intro v
+      apply funext_three <;>
+        simp [matrixLinearMap, ht, hsum, mul_ne_zero] <;>
+        field_simp [ht, hsum] <;>
+        ring)
+    (by
+      intro v
+      apply funext_three <;>
+        simp [matrixLinearMap, ht, hsum, mul_ne_zero] <;>
+        field_simp [ht, hsum] <;>
+        ring)
+
 /-- Explicit source-to-target basis change for every isolated table. -/
 def fialowskiBasisChange [CharZero K] : FialowskiForm → V K ≃ₗ[K] V K
   | .d1 => LinearEquiv.refl K (V K)
@@ -384,6 +410,183 @@ def fialowskiFamilyAlternatingTableEquiv (x : K) (hx : x ≠ 0) :
 theorem fialowskiFamily_alternating_isomorphic (x : K) (hx : x ≠ 0) :
     Isomorphic (fialowskiFamilyTable x (-x)) (fixedTable .c1) :=
   ⟨fialowskiFamilyAlternatingTableEquiv x hx⟩
+
+/-- If `t²*x*y=-1`, the nonalternating family fibre is the ordinary waved table
+with parameter `t*(x-y)`.  The orientation is chosen so the displayed basis map
+can be checked directly on standard basis products. -/
+def wavedToFialowskiFamilyTableEquiv (x y t : K) (ht : t ≠ 0)
+    (hsum : x + y ≠ 0) (htsq : t ^ 2 * x * y = -1) :
+    TableEquiv (wavedTable (t * (x - y))) (fialowskiFamilyTable x y) :=
+  TableEquiv.ofBasis (wavedToFamilyBasisChange x y t ht hsum) (by
+    intro i j
+    fin_cases i <;> fin_cases j <;>
+      apply funext_three <;>
+      simp [wavedToFamilyBasisChange, linearEquivOfInverse, matrixLinearMap,
+        wavedTable, fialowskiFamilyTable, tableOfProducts, e0, e2, mul,
+        Fin.sum_univ_three, ht, hsum] <;>
+      ring_nf
+    all_goals linear_combination (x + y) * htsq)
+
+theorem fialowskiFamily_isomorphic_waved_of_square (x y t : K) (ht : t ≠ 0)
+    (hsum : x + y ≠ 0) (htsq : t ^ 2 * x * y = -1) :
+    Isomorphic (fialowskiFamilyTable x y) (wavedTable (t * (x - y))) :=
+  ⟨(wavedToFialowskiFamilyTableEquiv x y t ht hsum htsq).symm⟩
+
+/-- If instead `t²*x*y=1`, the same basis produces the minus waved table. -/
+def realWavedMinusToFialowskiFamilyTableEquiv (x y t : K) (ht : t ≠ 0)
+    (hsum : x + y ≠ 0) (htsq : t ^ 2 * x * y = 1) :
+    TableEquiv (realWavedMinusTable (t * (x - y)))
+      (fialowskiFamilyTable x y) :=
+  TableEquiv.ofBasis (wavedToFamilyBasisChange x y t ht hsum) (by
+    intro i j
+    fin_cases i <;> fin_cases j <;>
+      apply funext_three <;>
+      simp [wavedToFamilyBasisChange, linearEquivOfInverse, matrixLinearMap,
+        realWavedMinusTable, fialowskiFamilyTable, tableOfProducts, e0, e2,
+        mul, Fin.sum_univ_three, ht, hsum] <;>
+      ring_nf
+    all_goals linear_combination (x + y) * htsq)
+
+theorem fialowskiFamily_isomorphic_realWavedMinus_of_square
+    (x y t : K) (ht : t ≠ 0) (hsum : x + y ≠ 0)
+    (htsq : t ^ 2 * x * y = 1) :
+    Isomorphic (fialowskiFamilyTable x y)
+      (realWavedMinusTable (t * (x - y))) :=
+  ⟨(realWavedMinusToFialowskiFamilyTableEquiv x y t ht hsum htsq).symm⟩
+
+/-- Over an algebraically closed field every nondegenerate, nonalternating fibre
+has an ordinary waved representative.  The polynomial relation is the
+denominator-free form of `k²=-(x-y)²/(x*y)`. -/
+theorem fialowskiFamily_nondegenerate_isomorphic_waved [IsAlgClosed K]
+    {x y : K} (hx : x ≠ 0) (hy : y ≠ 0) (hsum : x + y ≠ 0) :
+    ∃ k : K, Isomorphic (fialowskiFamilyTable x y) (wavedTable k) ∧
+      k ^ 2 * x * y = -(x - y) ^ 2 := by
+  obtain ⟨t, htroot⟩ := IsAlgClosed.exists_pow_nat_eq (-(x * y)⁻¹)
+    (by norm_num : 0 < 2)
+  have hxy : x * y ≠ 0 := mul_ne_zero hx hy
+  have htsq : t ^ 2 * x * y = -1 := by
+    calc
+      t ^ 2 * x * y = (-(x * y)⁻¹) * (x * y) := by rw [htroot]; ring
+      _ = -1 := by field_simp [hxy]
+  have ht : t ≠ 0 := by
+    intro htzero
+    subst t
+    norm_num at htsq
+  refine ⟨t * (x - y),
+    fialowskiFamily_isomorphic_waved_of_square x y t ht hsum htsq, ?_⟩
+  calc
+    (t * (x - y)) ^ 2 * x * y = (t ^ 2 * x * y) * (x - y) ^ 2 := by ring
+    _ = -(x - y) ^ 2 := by rw [htsq]; ring
+
+/-- Combining the boundary, alternating, and nondegenerate cases gives a complete
+crosswalk for every genuine projective point over an algebraically closed field.
+This is coverage of the source family only, not coverage of all algebras. -/
+theorem fialowskiFamily_projective_crosswalk [IsAlgClosed K]
+    {x y : K} (hxy : x ≠ 0 ∨ y ≠ 0) :
+    Isomorphic (fialowskiFamilyTable x y) (fixedTable .w2) ∨
+      Isomorphic (fialowskiFamilyTable x y) (fixedTable .c1) ∨
+      ∃ k : K, Isomorphic (fialowskiFamilyTable x y) (wavedTable k) := by
+  by_cases hx : x = 0
+  · left
+    have hyne : y ≠ 0 := by
+      intro hy
+      exact hxy.elim (fun h => h hx) (fun h => h hy)
+    exact hx ▸ fialowskiFamily_zero_y_isomorphic y hyne
+  by_cases hy : y = 0
+  · left
+    exact hy ▸ fialowskiFamily_x_zero_isomorphic x hx
+  by_cases hsum : x + y = 0
+  · right
+    left
+    have hyneg : y = -x := by linear_combination hsum
+    simpa [hyneg] using fialowskiFamily_alternating_isomorphic x hx
+  · right
+    right
+    obtain ⟨k, hk, _⟩ :=
+      fialowskiFamily_nondegenerate_isomorphic_waved hx hy hsum
+    exact ⟨k, hk⟩
+
+/-- Over `ℝ`, the sign of `x*y` decides whether a nondegenerate,
+nonalternating fibre belongs to the ordinary or minus waved family. -/
+theorem fialowskiFamily_real_nondegenerate_crosswalk
+    {x y : ℝ} (hx : x ≠ 0) (hy : y ≠ 0) (hsum : x + y ≠ 0) :
+    (∃ k : ℝ, Isomorphic (fialowskiFamilyTable x y) (wavedTable k) ∧
+      k ^ 2 * x * y = -(x - y) ^ 2) ∨
+    (∃ k : ℝ, Isomorphic (fialowskiFamilyTable x y) (realWavedMinusTable k) ∧
+      k ^ 2 * x * y = (x - y) ^ 2) := by
+  have hxy : x * y ≠ 0 := mul_ne_zero hx hy
+  rcases lt_or_gt_of_ne hxy with hneg | hpos
+  · left
+    let t : ℝ := √(-(x * y)⁻¹)
+    have harg : 0 < -(x * y)⁻¹ :=
+      neg_pos.mpr (inv_lt_zero.mpr hneg)
+    have htroot : t ^ 2 = -(x * y)⁻¹ := by
+      dsimp [t]
+      exact Real.sq_sqrt harg.le
+    have ht : t ≠ 0 := by
+      dsimp [t]
+      exact ne_of_gt (Real.sqrt_pos.2 harg)
+    have htsq : t ^ 2 * x * y = -1 := by
+      calc
+        t ^ 2 * x * y = (-(x * y)⁻¹) * (x * y) := by rw [htroot]; ring
+        _ = -1 := by field_simp [hxy]
+    refine ⟨t * (x - y),
+      fialowskiFamily_isomorphic_waved_of_square x y t ht hsum htsq, ?_⟩
+    calc
+      (t * (x - y)) ^ 2 * x * y = (t ^ 2 * x * y) * (x - y) ^ 2 := by ring
+      _ = -(x - y) ^ 2 := by rw [htsq]; ring
+  · right
+    let t : ℝ := √((x * y)⁻¹)
+    have harg : 0 < (x * y)⁻¹ := inv_pos.mpr hpos
+    have htroot : t ^ 2 = (x * y)⁻¹ := by
+      dsimp [t]
+      exact Real.sq_sqrt harg.le
+    have ht : t ≠ 0 := by
+      dsimp [t]
+      exact ne_of_gt (Real.sqrt_pos.2 harg)
+    have htsq : t ^ 2 * x * y = 1 := by
+      calc
+        t ^ 2 * x * y = (x * y)⁻¹ * (x * y) := by rw [htroot]; ring
+        _ = 1 := by field_simp [hxy]
+    refine ⟨t * (x - y),
+      fialowskiFamily_isomorphic_realWavedMinus_of_square x y t ht hsum htsq,
+      ?_⟩
+    calc
+      (t * (x - y)) ^ 2 * x * y = (t ^ 2 * x * y) * (x - y) ^ 2 := by ring
+      _ = (x - y) ^ 2 := by rw [htsq]; ring
+
+/-- Complete source-family crosswalk over `ℝ`, including both real waved
+families.  This still says nothing about completeness of the source list itself. -/
+theorem fialowskiFamily_real_projective_crosswalk
+    {x y : ℝ} (hxy : x ≠ 0 ∨ y ≠ 0) :
+    Isomorphic (fialowskiFamilyTable x y) (fixedTable .w2) ∨
+      Isomorphic (fialowskiFamilyTable x y) (fixedTable .c1) ∨
+      (∃ k : ℝ, Isomorphic (fialowskiFamilyTable x y) (wavedTable k)) ∨
+      ∃ k : ℝ, Isomorphic (fialowskiFamilyTable x y) (realWavedMinusTable k) := by
+  by_cases hx : x = 0
+  · left
+    have hyne : y ≠ 0 := by
+      intro hy
+      exact hxy.elim (fun h => h hx) (fun h => h hy)
+    exact hx ▸ fialowskiFamily_zero_y_isomorphic y hyne
+  by_cases hy : y = 0
+  · left
+    exact hy ▸ fialowskiFamily_x_zero_isomorphic x hx
+  by_cases hsum : x + y = 0
+  · right
+    left
+    have hyneg : y = -x := by linear_combination hsum
+    simpa [hyneg] using fialowskiFamily_alternating_isomorphic x hx
+  · rcases fialowskiFamily_real_nondegenerate_crosswalk hx hy hsum with
+      ⟨k, hk, _⟩ | ⟨k, hk, _⟩
+    · right
+      right
+      left
+      exact ⟨k, hk⟩
+    · right
+      right
+      right
+      exact ⟨k, hk⟩
 
 /-- A coefficient that is visibly one in every isolated source table. -/
 private def fialowskiNonzeroWitness : FialowskiForm → Fin 3 × Fin 3 × Fin 3

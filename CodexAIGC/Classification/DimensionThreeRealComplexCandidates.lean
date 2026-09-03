@@ -1,4 +1,5 @@
 import CodexAIGC.Foundations.BilinearTransport
+import Mathlib.Data.Real.Basic
 import Mathlib.Tactic.FinCases
 
 /-!
@@ -12,8 +13,8 @@ claim; those require independent structural proofs in later files.
 The fixed tables are defined over any field.  The two parameter families
 are also associative for every parameter.  Negating the third basis vector gives
 explicit table equivalences identifying `wavedTable k` with `wavedTable (-k)` and
-likewise for the minus family; the converse parameter criterion is left to a later
-file.
+likewise for the minus family.  The converse parameter criteria are proved below,
+as is disjointness of the ordinary and minus families over `ℝ`.
 -/
 
 namespace CodexAIGC.DimensionThreeRealComplex
@@ -99,6 +100,26 @@ def fixedTable : FixedForm → StructureConstants K 3
 def wavedTable (k : K) : StructureConstants K 3 :=
   tableOfProducts 0 0 0 0 e0 0 0 (k • e0) e0
 
+@[simp] theorem wavedTable_mul_e1_e1 (k : K) :
+    (wavedTable k).mul e1 e1 = e0 := by
+  apply funext_three <;>
+    simp [wavedTable, tableOfProducts, e0, e1, mul, Fin.sum_univ_three]
+
+@[simp] theorem wavedTable_mul_e1_e2 (k : K) :
+    (wavedTable k).mul e1 e2 = 0 := by
+  apply funext_three <;>
+    simp [wavedTable, tableOfProducts, e0, e1, e2, mul, Fin.sum_univ_three]
+
+@[simp] theorem wavedTable_mul_e2_e1 (k : K) :
+    (wavedTable k).mul e2 e1 = k • e0 := by
+  apply funext_three <;>
+    simp [wavedTable, tableOfProducts, e0, e1, e2, mul, Fin.sum_univ_three]
+
+@[simp] theorem wavedTable_mul_e2_e2 (k : K) :
+    (wavedTable k).mul e2 e2 = e0 := by
+  apply funext_three <;>
+    simp [wavedTable, tableOfProducts, e0, e2, mul, Fin.sum_univ_three]
+
 /-- The extra real unital table: `ℝ × ℂ` in the displayed basis. -/
 def realUnitalMinusTable : StructureConstants K 3 :=
   tableOfProducts e0 0 0 0 e1 e2 0 e2 (-e1)
@@ -110,6 +131,28 @@ def realStraightMinusTable : StructureConstants K 3 :=
 /-- The second real waved family. -/
 def realWavedMinusTable (k : K) : StructureConstants K 3 :=
   tableOfProducts 0 0 0 0 e0 0 0 (k • e0) (-e0)
+
+@[simp] theorem realWavedMinusTable_mul_e1_e1 (k : K) :
+    (realWavedMinusTable k).mul e1 e1 = e0 := by
+  apply funext_three <;>
+    simp [realWavedMinusTable, tableOfProducts, e0, e1, mul, Fin.sum_univ_three]
+
+@[simp] theorem realWavedMinusTable_mul_e1_e2 (k : K) :
+    (realWavedMinusTable k).mul e1 e2 = 0 := by
+  apply funext_three <;>
+    simp [realWavedMinusTable, tableOfProducts, e0, e1, e2, mul,
+      Fin.sum_univ_three]
+
+@[simp] theorem realWavedMinusTable_mul_e2_e1 (k : K) :
+    (realWavedMinusTable k).mul e2 e1 = k • e0 := by
+  apply funext_three <;>
+    simp [realWavedMinusTable, tableOfProducts, e0, e1, e2, mul,
+      Fin.sum_univ_three]
+
+@[simp] theorem realWavedMinusTable_mul_e2_e2 (k : K) :
+    (realWavedMinusTable k).mul e2 e2 = -e0 := by
+  apply funext_three <;>
+    simp [realWavedMinusTable, tableOfProducts, e0, e2, mul, Fin.sum_univ_three]
 
 /-- The involution fixing the first two coordinates and negating the third. -/
 def negateThirdLinearEquiv : V K ≃ₗ[K] V K where
@@ -408,6 +451,117 @@ theorem wavedTable_neg_isomorphic (k : K) :
     Isomorphic (wavedTable (-k)) (wavedTable k) :=
   ⟨wavedNegTableEquiv k⟩
 
+/-- The sign identification is the entire parameter redundancy in the ordinary
+waved family.  The forward direction is proved from the determinant and
+alternating part of the induced two-dimensional bilinear form. -/
+theorem wavedTable_isomorphic_iff (k l : K) :
+    Isomorphic (wavedTable k) (wavedTable l) ↔ l = k ∨ l = -k := by
+  constructor
+  · rintro ⟨equiv⟩
+    let phi := equiv.toLinearEquiv
+    let p := phi (e1 : V K)
+    let q := phi (e2 : V K)
+    let r := phi (e0 : V K)
+    let m := r 0
+    let x := p 1
+    let y := p 2
+    let u := q 1
+    let v := q 2
+    have hr1 : r 1 = 0 := by
+      have h := congrArg (fun z : V K => z 1) (equiv.map_mul (e1 : V K) e1)
+      rw [wavedTable_mul_e1_e1] at h
+      simpa [phi, r, wavedTable, tableOfProducts, e0, e1, e2, mul,
+        Fin.sum_univ_three] using h
+    have hr2 : r 2 = 0 := by
+      have h := congrArg (fun z : V K => z 2) (equiv.map_mul (e1 : V K) e1)
+      rw [wavedTable_mul_e1_e1] at h
+      simpa [phi, r, wavedTable, tableOfProducts, e0, e1, e2, mul,
+        Fin.sum_univ_three] using h
+    have hm : m ≠ 0 := by
+      intro hmzero
+      have hrzero : r = 0 := by
+        apply funext_three
+        · exact hmzero
+        · exact hr1
+        · exact hr2
+      have he0zero : (e0 : V K) = 0 := by
+        apply phi.injective
+        simpa [phi, r] using hrzero
+      have hone := congrArg (fun z : V K => z 0) he0zero
+      have : (1 : K) = 0 := by
+        calc
+          1 = (e0 : V K) 0 := rfl
+          _ = (0 : V K) 0 := hone
+          _ = 0 := rfl
+      exact one_ne_zero this
+    have h11 : x * x + l * y * x + y * y = m := by
+      have h := congrArg (fun z : V K => z 0) (equiv.map_mul (e1 : V K) e1)
+      rw [wavedTable_mul_e1_e1] at h
+      have hraw : m = x * x + (y * x * l + y * y) := by
+        simpa [phi, p, r, m, x, y, wavedTable, tableOfProducts, e0, e1, e2,
+          mul, Fin.sum_univ_three] using h
+      calc
+        x * x + l * y * x + y * y = x * x + (y * x * l + y * y) := by ring
+        _ = m := hraw.symm
+    have h12 : x * u + l * y * u + y * v = 0 := by
+      have h := congrArg (fun z : V K => z 0) (equiv.map_mul (e1 : V K) e2)
+      rw [wavedTable_mul_e1_e2] at h
+      have hraw : 0 = x * u + (y * u * l + y * v) := by
+        simpa [phi, p, q, x, y, u, v, wavedTable, tableOfProducts, e0, e1, e2,
+          mul, Fin.sum_univ_three] using h
+      calc
+        x * u + l * y * u + y * v = x * u + (y * u * l + y * v) := by ring
+        _ = 0 := hraw.symm
+    have h21 : u * x + l * v * x + v * y = k * m := by
+      have h := congrArg (fun z : V K => z 0) (equiv.map_mul (e2 : V K) e1)
+      rw [wavedTable_mul_e2_e1] at h
+      have hraw : k * m = u * x + (v * x * l + v * y) := by
+        simpa [phi, p, q, r, m, x, y, u, v, wavedTable, tableOfProducts,
+          e0, e1, e2, mul, Fin.sum_univ_three] using h
+      calc
+        u * x + l * v * x + v * y = u * x + (v * x * l + v * y) := by ring
+        _ = k * m := hraw.symm
+    have h22 : u * u + l * v * u + v * v = m := by
+      have h := congrArg (fun z : V K => z 0) (equiv.map_mul (e2 : V K) e2)
+      rw [wavedTable_mul_e2_e2] at h
+      have hraw : m = u * u + (v * u * l + v * v) := by
+        simpa [phi, q, r, m, u, v, wavedTable, tableOfProducts, e0, e1, e2,
+          mul, Fin.sum_univ_three] using h
+      calc
+        u * u + l * v * u + v * v = u * u + (v * u * l + v * v) := by ring
+        _ = m := hraw.symm
+    let det := x * v - y * u
+    have hdet : det ^ 2 = m ^ 2 := by
+      calc
+        det ^ 2 =
+            (x * x + l * y * x + y * y) *
+              (u * u + l * v * u + v * v) -
+            (x * u + l * y * u + y * v) *
+              (u * x + l * v * x + v * y) := by
+                simp [det]
+                ring
+        _ = m ^ 2 := by rw [h11, h12, h21, h22]; ring
+    have hskew : l * det = k * m := by
+      calc
+        l * det =
+            (u * x + l * v * x + v * y) -
+              (x * u + l * y * u + y * v) := by
+                simp [det]
+                ring
+        _ = k * m := by rw [h21, h12]; ring
+    have hsquares : l ^ 2 * m ^ 2 = k ^ 2 * m ^ 2 := by
+      calc
+        l ^ 2 * m ^ 2 = l ^ 2 * det ^ 2 := by rw [hdet]
+        _ = (l * det) ^ 2 := by ring
+        _ = (k * m) ^ 2 := by rw [hskew]
+        _ = k ^ 2 * m ^ 2 := by ring
+    have hlk : l ^ 2 = k ^ 2 :=
+      mul_right_cancel₀ (pow_ne_zero 2 hm) hsquares
+    exact eq_or_eq_neg_of_sq_eq_sq l k hlk
+  · rintro (rfl | rfl)
+    · exact Isomorphic.refl _
+    · exact Isomorphic.symm (wavedTable_neg_isomorphic k)
+
 /-- The same basis involution gives the sign identification in the real minus
 waved family. -/
 def realWavedMinusNegTableEquiv (k : K) :
@@ -423,5 +577,203 @@ def realWavedMinusNegTableEquiv (k : K) :
 theorem realWavedMinusTable_neg_isomorphic (k : K) :
     Isomorphic (realWavedMinusTable (-k)) (realWavedMinusTable k) :=
   ⟨realWavedMinusNegTableEquiv k⟩
+
+/-- The sign identification is also the entire parameter redundancy in the minus
+waved family. -/
+theorem realWavedMinusTable_isomorphic_iff (k l : K) :
+    Isomorphic (realWavedMinusTable k) (realWavedMinusTable l) ↔
+      l = k ∨ l = -k := by
+  constructor
+  · rintro ⟨equiv⟩
+    let phi := equiv.toLinearEquiv
+    let p := phi (e1 : V K)
+    let q := phi (e2 : V K)
+    let r := phi (e0 : V K)
+    let m := r 0
+    let x := p 1
+    let y := p 2
+    let u := q 1
+    let v := q 2
+    have hr1 : r 1 = 0 := by
+      have h := congrArg (fun z : V K => z 1) (equiv.map_mul (e1 : V K) e1)
+      rw [realWavedMinusTable_mul_e1_e1] at h
+      simpa [phi, r, realWavedMinusTable, tableOfProducts, e0, e1, e2, mul,
+        Fin.sum_univ_three] using h
+    have hr2 : r 2 = 0 := by
+      have h := congrArg (fun z : V K => z 2) (equiv.map_mul (e1 : V K) e1)
+      rw [realWavedMinusTable_mul_e1_e1] at h
+      simpa [phi, r, realWavedMinusTable, tableOfProducts, e0, e1, e2, mul,
+        Fin.sum_univ_three] using h
+    have hm : m ≠ 0 := by
+      intro hmzero
+      have hrzero : r = 0 := by
+        apply funext_three
+        · exact hmzero
+        · exact hr1
+        · exact hr2
+      have he0zero : (e0 : V K) = 0 := by
+        apply phi.injective
+        simpa [phi, r] using hrzero
+      have hone := congrArg (fun z : V K => z 0) he0zero
+      have : (1 : K) = 0 := by
+        calc
+          1 = (e0 : V K) 0 := rfl
+          _ = (0 : V K) 0 := hone
+          _ = 0 := rfl
+      exact one_ne_zero this
+    have h11 : x * x + l * y * x - y * y = m := by
+      have h := congrArg (fun z : V K => z 0) (equiv.map_mul (e1 : V K) e1)
+      rw [realWavedMinusTable_mul_e1_e1] at h
+      simp [phi, p, r, m, x, y, realWavedMinusTable, tableOfProducts,
+        e0, e1, e2, mul, Fin.sum_univ_three] at h
+      dsimp [phi, p, r, m, x, y, e0, e1, e2] at h ⊢
+      ring_nf at h ⊢
+      exact h.symm
+    have h12 : x * u + l * y * u - y * v = 0 := by
+      have h := congrArg (fun z : V K => z 0) (equiv.map_mul (e1 : V K) e2)
+      rw [realWavedMinusTable_mul_e1_e2] at h
+      simp [phi, p, q, x, y, u, v, realWavedMinusTable, tableOfProducts,
+        e0, e1, e2, mul, Fin.sum_univ_three] at h
+      dsimp [phi, p, q, x, y, u, v, e0, e1, e2] at h ⊢
+      ring_nf at h ⊢
+      exact h.symm
+    have h21 : u * x + l * v * x - v * y = k * m := by
+      have h := congrArg (fun z : V K => z 0) (equiv.map_mul (e2 : V K) e1)
+      rw [realWavedMinusTable_mul_e2_e1] at h
+      simp [phi, p, q, r, m, x, y, u, v, realWavedMinusTable,
+        tableOfProducts, e0, e1, e2, mul, Fin.sum_univ_three] at h
+      dsimp [phi, p, q, r, m, x, y, u, v, e0, e1, e2] at h ⊢
+      ring_nf at h ⊢
+      exact h.symm
+    have h22 : u * u + l * v * u - v * v = -m := by
+      have h := congrArg (fun z : V K => z 0) (equiv.map_mul (e2 : V K) e2)
+      rw [realWavedMinusTable_mul_e2_e2] at h
+      simp [phi, q, r, m, u, v, realWavedMinusTable, tableOfProducts,
+        e0, e1, e2, mul, Fin.sum_univ_three] at h
+      dsimp [phi, q, r, m, u, v, e0, e1, e2] at h ⊢
+      ring_nf at h ⊢
+      exact h.symm
+    let det := x * v - y * u
+    have hdet : det ^ 2 = m ^ 2 := by
+      calc
+        det ^ 2 = -(
+            (x * x + l * y * x - y * y) *
+              (u * u + l * v * u - v * v) -
+            (x * u + l * y * u - y * v) *
+              (u * x + l * v * x - v * y)) := by
+                simp [det]
+                ring
+        _ = m ^ 2 := by rw [h11, h12, h21, h22]; ring
+    have hskew : l * det = k * m := by
+      calc
+        l * det =
+            (u * x + l * v * x - v * y) -
+              (x * u + l * y * u - y * v) := by
+                simp [det]
+                ring
+        _ = k * m := by rw [h21, h12]; ring
+    have hsquares : l ^ 2 * m ^ 2 = k ^ 2 * m ^ 2 := by
+      calc
+        l ^ 2 * m ^ 2 = l ^ 2 * det ^ 2 := by rw [hdet]
+        _ = (l * det) ^ 2 := by ring
+        _ = (k * m) ^ 2 := by rw [hskew]
+        _ = k ^ 2 * m ^ 2 := by ring
+    have hlk : l ^ 2 = k ^ 2 :=
+      mul_right_cancel₀ (pow_ne_zero 2 hm) hsquares
+    exact eq_or_eq_neg_of_sq_eq_sq l k hlk
+  · rintro (rfl | rfl)
+    · exact Isomorphic.refl _
+    · exact Isomorphic.symm (realWavedMinusTable_neg_isomorphic k)
+
+/-- Over an ordered field the ordinary and minus waved families are disjoint.
+The determinant of the induced two-dimensional bilinear form would otherwise be
+both a positive and a negative square. -/
+theorem wavedTable_not_isomorphic_realWavedMinusTable
+    (k l : ℝ) :
+    ¬ Isomorphic (wavedTable k) (realWavedMinusTable l) := by
+  rintro ⟨equiv⟩
+  let phi := equiv.toLinearEquiv
+  let p := phi (e1 : V ℝ)
+  let q := phi (e2 : V ℝ)
+  let r := phi (e0 : V ℝ)
+  let m := r 0
+  let x := p 1
+  let y := p 2
+  let u := q 1
+  let v := q 2
+  have hr1 : r 1 = 0 := by
+    have h := congrArg (fun z : V ℝ => z 1) (equiv.map_mul (e1 : V ℝ) e1)
+    rw [wavedTable_mul_e1_e1] at h
+    simpa [phi, r, realWavedMinusTable, tableOfProducts, e0, e1, e2, mul,
+      Fin.sum_univ_three] using h
+  have hr2 : r 2 = 0 := by
+    have h := congrArg (fun z : V ℝ => z 2) (equiv.map_mul (e1 : V ℝ) e1)
+    rw [wavedTable_mul_e1_e1] at h
+    simpa [phi, r, realWavedMinusTable, tableOfProducts, e0, e1, e2, mul,
+      Fin.sum_univ_three] using h
+  have hm : m ≠ 0 := by
+    intro hmzero
+    have hrzero : r = 0 := by
+      apply funext_three
+      · exact hmzero
+      · exact hr1
+      · exact hr2
+    have he0zero : (e0 : V ℝ) = 0 := by
+      apply phi.injective
+      simpa [phi, r] using hrzero
+    have hone := congrArg (fun z : V ℝ => z 0) he0zero
+    have : (1 : ℝ) = 0 := by
+      calc
+        1 = (e0 : V ℝ) 0 := rfl
+        _ = (0 : V ℝ) 0 := hone
+        _ = 0 := rfl
+    exact one_ne_zero this
+  have h11 : x * x + l * y * x - y * y = m := by
+    have h := congrArg (fun z : V ℝ => z 0) (equiv.map_mul (e1 : V ℝ) e1)
+    rw [wavedTable_mul_e1_e1] at h
+    simp [phi, p, r, m, x, y, realWavedMinusTable, tableOfProducts,
+      e0, e1, e2, mul, Fin.sum_univ_three] at h
+    dsimp [phi, p, r, m, x, y, e0, e1, e2] at h ⊢
+    ring_nf at h ⊢
+    exact h.symm
+  have h12 : x * u + l * y * u - y * v = 0 := by
+    have h := congrArg (fun z : V ℝ => z 0) (equiv.map_mul (e1 : V ℝ) e2)
+    rw [wavedTable_mul_e1_e2] at h
+    simp [phi, p, q, x, y, u, v, realWavedMinusTable, tableOfProducts,
+      e0, e1, e2, mul, Fin.sum_univ_three] at h
+    dsimp [phi, p, q, x, y, u, v, e0, e1, e2] at h ⊢
+    ring_nf at h ⊢
+    exact h.symm
+  have h21 : u * x + l * v * x - v * y = k * m := by
+    have h := congrArg (fun z : V ℝ => z 0) (equiv.map_mul (e2 : V ℝ) e1)
+    rw [wavedTable_mul_e2_e1] at h
+    simp [phi, p, q, r, m, x, y, u, v, realWavedMinusTable,
+      tableOfProducts, e0, e1, e2, mul, Fin.sum_univ_three] at h
+    dsimp [phi, p, q, r, m, x, y, u, v, e0, e1, e2] at h ⊢
+    ring_nf at h ⊢
+    exact h.symm
+  have h22 : u * u + l * v * u - v * v = m := by
+    have h := congrArg (fun z : V ℝ => z 0) (equiv.map_mul (e2 : V ℝ) e2)
+    rw [wavedTable_mul_e2_e2] at h
+    simp [phi, q, r, m, u, v, realWavedMinusTable, tableOfProducts,
+      e0, e1, e2, mul, Fin.sum_univ_three] at h
+    dsimp [phi, q, r, m, u, v, e0, e1, e2] at h ⊢
+    ring_nf at h ⊢
+    exact h.symm
+  let det := x * v - y * u
+  have hdet : -(det ^ 2) = m ^ 2 := by
+    calc
+      -(det ^ 2) =
+          (x * x + l * y * x - y * y) *
+            (u * u + l * v * u - v * v) -
+          (x * u + l * y * u - y * v) *
+            (u * x + l * v * x - v * y) := by
+              simp [det]
+              ring
+      _ = m ^ 2 := by rw [h11, h12, h21, h22]; ring
+  have hleft : -(det ^ 2) ≤ 0 := neg_nonpos.mpr (sq_nonneg det)
+  have hright : 0 < m ^ 2 := sq_pos_of_ne_zero hm
+  have : 0 < -(det ^ 2) := by rw [hdet]; exact hright
+  exact (not_lt_of_ge hleft) this
 
 end CodexAIGC.DimensionThreeRealComplex

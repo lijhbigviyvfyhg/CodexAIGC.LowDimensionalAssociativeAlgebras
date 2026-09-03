@@ -38,13 +38,19 @@ The following statements are proved in
 - common nonzero scaling and coordinate swap give explicit isomorphisms;
 - `(x:0)` and `(0:y)` with nonzero coordinate are `W2`;
 - `(x:-x)` with `x ≠ 0` is `C1`;
+- every remaining fibre over an algebraically closed field is an ordinary
+  `W3(k)`, with the parameter-square relation proved in Lean;
+- over `ℝ`, every remaining fibre is assigned to the ordinary or minus family
+  according to the sign of `x*y`;
 - all 21 isolated tables are nonzero, and `d22(x:y)=0` exactly when `(x,y)=(0,0)`.
+
+The candidate module additionally proves the converse parameter criteria
+`W3(k) ≅ W3(l) ↔ l=k or l=-k` for both families, and proves that the ordinary
+and minus families are never isomorphic over `ℝ`.
 
 The following are still open and must not be inferred from this note:
 
-- the general nondegenerate `d22` to `W3(k)` formula in Lean;
-- the converse `W3(k) ≅ W3(l) → l=±k`;
-- separation of every fixed table from every other table and family fibre;
+- separation of every fixed table from every other fixed table and family fibre;
 - an independent Lean proof that every three-dimensional real or complex
   associative multiplication occurs in the list.
 
@@ -107,17 +113,24 @@ by selecting a projective point: Lean proves the family table is zero precisely
 at `(0,0)`, which is not a point of projective space, while every `d1,...,d21` has
 a coefficient equal to one. The 2019 label `C0` supplies the missing candidate.
 
-For `x*y ≠ 0` and `x+y ≠ 0`, the expected ordinary-family parameter satisfies
+For `x*y ≠ 0` and `x+y ≠ 0`, Lean constructs a basis
+
+```text
+f = a+b,   g = t(x*a-y*b),   e = (x+y)c.
+```
+
+When `t^2*x*y=-1`, this is the ordinary family with `k=t(x-y)` and hence
 
 ```text
 k^2 = -(x-y)^2 / (x*y).
 ```
 
-This formula currently serves only as the next proof target. It is not counted as
-verified until both an explicit Lean equivalence and the converse parameter
-criterion compile. Over `ℝ`, the sign of the associated quadratic form also
-creates the second real waved family, so the real and complex arguments must be
-kept separate.
+The theorem is stored denominator-free as `k^2*x*y=-(x-y)^2`. Algebraic closure
+supplies such a `t`, so this covers the complex source family. Over `ℝ`, when
+`x*y<0` the same ordinary construction applies; when `x*y>0`, Lean chooses
+`t^2*x*y=1` and obtains the minus family with
+`k^2*x*y=(x-y)^2`. The two real families are separated by the sign of the
+determinant of their induced two-dimensional bilinear forms.
 
 ## OCR warning
 
