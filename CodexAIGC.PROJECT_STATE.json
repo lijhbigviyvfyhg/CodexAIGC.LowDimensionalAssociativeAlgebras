@@ -83,7 +83,8 @@
       "exact_parameter_quotient": "k_modulo_sign",
       "pairwise_candidate_nonisomorphism": true,
       "curled_sector_coverage": true,
-      "open_coverage_sectors": ["unital", "waved", "straight"],
+      "straight_sector_coverage": true,
+      "open_coverage_sectors": ["unital", "waved"],
       "unique_coverage": false
     },
     "Real_dimension_3_candidates": {
@@ -94,7 +95,8 @@
       "exact_parameter_quotient": "k_modulo_sign_with_disjoint_families",
       "pairwise_candidate_nonisomorphism": true,
       "curled_sector_coverage": true,
-      "open_coverage_sectors": ["unital", "waved", "straight"],
+      "straight_sector_coverage": true,
+      "open_coverage_sectors": ["unital", "waved"],
       "unique_coverage": false
     }
   },

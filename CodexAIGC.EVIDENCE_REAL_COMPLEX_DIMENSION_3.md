@@ -9,11 +9,12 @@ The candidate list has passed verification gates 1--3:
 3. all distinct candidate strata are nonisomorphic, including the two real-only
    fixed tables and the two mutually disjoint real parameter families.
 
-Gate 4 is partially complete.  The curled sector is now independently proved
-to consist exactly of `C0`--`C4`, over every characteristic-zero field.  The
-repository does **not** yet prove coverage for the unital, waved, or straight
-sectors, so it still makes no global dimension-three completeness claim over
-`ℂ` or `ℝ`.
+Gate 4 is partially complete.  The curled sector is independently proved to
+consist exactly of `C0`--`C4`, over every characteristic-zero field.  The
+straight sector is independently proved to consist of `S1`--`S4` over `ℂ` and
+those four forms plus `S3⁻` over `ℝ`.  The repository does **not** yet prove
+coverage for the unital or waved sectors, so it still makes no global
+dimension-three completeness claim over `ℂ` or `ℝ`.
 
 ## Candidate lists
 
@@ -115,6 +116,25 @@ by that idempotent according to projection rank `0`, `1`, or `2`, yielding
 `associative_curled_classification` packages the five alternatives, and
 `complex_curled_sector_coverage` and `real_curled_sector_coverage` discharge
 the corresponding field-specific sector obligations.
+
+[`DimensionThreeRealComplexStraightReduction.lean`](./CodexAIGC/Classification/DimensionThreeRealComplexStraightReduction.lean)
+closes the straight obligation.  Starting from a witness whose powers
+`x,x²,x³` are independent, it proves by associativity that the entire table is
+the power table determined by
+
+```text
+x⁴ = d x + b x² + a x³.
+```
+
+It directly verifies that every such power table is associative and constructs
+the table equivalence from the abstract algebra.  The nonunital sector forces
+`d=0`.  The cases `a=b=0` and `b=0,a≠0` give `S1` and `S2`.  For `b≠0`, an
+explicit annihilator vector splits off and the complementary two-dimensional
+block has centered generator with square `(a²+4b)/4`.  Complex square-root
+existence yields `S3` or `S4`; real sign trichotomy yields `S3`, `S4`, or the
+negative block `S3⁻`.  Every basis change and every multiplication relation is
+kernel checked.  The field-specific conclusions are
+`complex_straight_sector_coverage` and `real_straight_sector_coverage`.
 
 ## Source independence
 
