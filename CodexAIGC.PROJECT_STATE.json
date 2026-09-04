@@ -85,7 +85,8 @@
       "curled_sector_coverage": true,
       "straight_sector_coverage": true,
       "unital_unitally_straight_subsector_coverage": true,
-      "open_coverage_sectors": ["unital", "waved"],
+      "unital_sector_coverage": true,
+      "open_coverage_sectors": ["waved"],
       "unique_coverage": false
     },
     "Real_dimension_3_candidates": {
@@ -98,7 +99,8 @@
       "curled_sector_coverage": true,
       "straight_sector_coverage": true,
       "unital_unitally_straight_subsector_coverage": true,
-      "open_coverage_sectors": ["unital", "waved"],
+      "unital_sector_coverage": true,
+      "open_coverage_sectors": ["waved"],
       "unique_coverage": false
     }
   },

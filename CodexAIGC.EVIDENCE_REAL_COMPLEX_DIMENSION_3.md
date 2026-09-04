@@ -154,6 +154,31 @@ residual quadratic discriminant give the same three split cases or the extra
 literature.  The remaining unital obligation is precisely the case where no
 `1,x,x²` is a basis.
 
+[`DimensionThreeRealComplexUnitalNonstraightReduction.lean`](./CodexAIGC/Classification/DimensionThreeRealComplexUnitalNonstraightReduction.lean)
+closes that remaining branch and therefore the full unital sector.  If no
+`1,x,x²` is a basis, it constructs a centered basis `1,u,v` and proves
+
+```text
+u² = α 1,   v² = β 1,   uv + vu = γ 1.
+```
+
+Writing `uv` in this basis and expanding associativity then forces two scalars
+`p,q` with
+
+```text
+u² = q² 1
+v² = p² 1
+uv = -pq 1 + p u + q v
+vu = -pq 1 - p u - q v.
+```
+
+For `p=q=0`, the complementary plane has zero multiplication and an explicit
+basis equivalence gives `U0`.  Otherwise, the proof constructs `n,h` with
+`n²=0`, `h²=1`, `nh=n`, and `hn=-n`, and an explicit basis equivalence gives
+`U1`.  The public theorems `complex_associative_unital_classification`,
+`real_associative_unital_classification`, `complex_unital_sector_coverage`, and
+`real_unital_sector_coverage` now discharge the complete unital obligation.
+
 ## Source independence
 
 The literature tables are treated as inputs to audit, not proof authorities.
