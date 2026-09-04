@@ -84,6 +84,7 @@
       "pairwise_candidate_nonisomorphism": true,
       "curled_sector_coverage": true,
       "straight_sector_coverage": true,
+      "unital_unitally_straight_subsector_coverage": true,
       "open_coverage_sectors": ["unital", "waved"],
       "unique_coverage": false
     },
@@ -96,6 +97,7 @@
       "pairwise_candidate_nonisomorphism": true,
       "curled_sector_coverage": true,
       "straight_sector_coverage": true,
+      "unital_unitally_straight_subsector_coverage": true,
       "open_coverage_sectors": ["unital", "waved"],
       "unique_coverage": false
     }

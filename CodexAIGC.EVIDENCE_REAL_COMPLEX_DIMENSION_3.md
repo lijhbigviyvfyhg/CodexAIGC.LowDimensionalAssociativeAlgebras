@@ -136,6 +136,24 @@ negative block `S3⁻`.  Every basis change and every multiplication relation is
 kernel checked.  The field-specific conclusions are
 `complex_straight_sector_coverage` and `real_straight_sector_coverage`.
 
+[`DimensionThreeRealComplexUnitalReduction.lean`](./CodexAIGC/Classification/DimensionThreeRealComplexUnitalReduction.lean)
+closes the unitally-straight subcase of the unital obligation.  From a chosen
+identity and a basis `1,x,x²`, it reconstructs the whole multiplication from
+
+```text
+x³ = d 1 + b x + a x²
+```
+
+and directly proves that the resulting three-parameter cubic table is
+associative.  It then proves explicit table equivalences for all root patterns:
+three distinct roots give `U2`, a simple and a double root give `U3`, and a
+triple root gives `U4`.  Over `ℂ`, algebraic closedness supplies a complete
+root factorization.  Over `ℝ`, an internally proved real-root theorem and the
+residual quadratic discriminant give the same three split cases or the extra
+`ℝ × ℂ` table.  No cubic-classification statement is imported from the
+literature.  The remaining unital obligation is precisely the case where no
+`1,x,x²` is a basis.
+
 ## Source independence
 
 The literature tables are treated as inputs to audit, not proof authorities.
