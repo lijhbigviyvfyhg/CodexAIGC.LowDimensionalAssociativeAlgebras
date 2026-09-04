@@ -24,8 +24,8 @@
     "literature_audit_complete": false
   },
   "verified_slices": {
-    "Complex": [0, 1, 2],
-    "Real": [0, 1, 2],
+    "Complex": [0, 1, 2, 3],
+    "Real": [0, 1, 2, 3],
     "F_2": [0, 1, 2, 3]
   },
   "finite_certificates": {
@@ -86,8 +86,10 @@
       "straight_sector_coverage": true,
       "unital_unitally_straight_subsector_coverage": true,
       "unital_sector_coverage": true,
-      "open_coverage_sectors": ["waved"],
-      "unique_coverage": false
+      "waved_sector_coverage": true,
+      "open_coverage_sectors": [],
+      "unique_coverage": true,
+      "quotient_classification": true
     },
     "Real_dimension_3_candidates": {
       "common_fixed_tables": 23,
@@ -100,8 +102,10 @@
       "straight_sector_coverage": true,
       "unital_unitally_straight_subsector_coverage": true,
       "unital_sector_coverage": true,
-      "open_coverage_sectors": ["waved"],
-      "unique_coverage": false
+      "waved_sector_coverage": true,
+      "open_coverage_sectors": [],
+      "unique_coverage": true,
+      "quotient_classification": true
     }
   },
   "counts": {

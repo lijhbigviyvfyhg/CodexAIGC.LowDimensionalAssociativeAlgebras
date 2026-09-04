@@ -2,19 +2,23 @@
 
 ## Current theorem boundary
 
-The candidate list has passed verification gates 1--3:
+The real and complex dimension-three classifications have passed all four
+verification gates:
 
 1. every displayed multiplication is associative;
 2. both parameter families have the exact quotient `k ~ -k`;
 3. all distinct candidate strata are nonisomorphic, including the two real-only
    fixed tables and the two mutually disjoint real parameter families.
 
-Gate 4 is partially complete.  The curled sector is independently proved to
-consist exactly of `C0`--`C4`, over every characteristic-zero field.  The
-straight sector is independently proved to consist of `S1`--`S4` over `ℂ` and
-those four forms plus `S3⁻` over `ℝ`.  The repository does **not** yet prove
-coverage for the unital or waved sectors, so it still makes no global
-dimension-three completeness claim over `ℂ` or `ℝ`.
+4. every associative three-dimensional table is isomorphic to a candidate,
+   and the resulting candidate quotient is unique.
+
+The four intrinsic sectors are all independently closed.  Curled tables give
+`C0`--`C4`; straight tables give `S1`--`S4` and the extra real negative block;
+unital tables give `U0`--`U4` and the extra real `ℝ × ℂ` block; waved tables
+give `W1`, `W2`, `W4`--`W10`, and the one complex/two real parameter-family
+strata.  Consequently the repository now makes a global dimension-three
+completeness claim over both `ℂ` and `ℝ`.
 
 ## Candidate lists
 
@@ -178,6 +182,34 @@ basis equivalence gives `U0`.  Otherwise, the proof constructs `n,h` with
 `U1`.  The public theorems `complex_associative_unital_classification`,
 `real_associative_unital_classification`, `complex_unital_sector_coverage`, and
 `real_unital_sector_coverage` now discharge the complete unital obligation.
+
+[`DimensionThreeRealComplexWavedReduction.lean`](./CodexAIGC/Classification/DimensionThreeRealComplexWavedReduction.lean)
+closes the waved obligation and then the global classification.  From
+noncurledness it chooses `f` with `f,f²` independent; nonstraightness forces
+`f³ = a f + b f²`, so associativity determines the generated plane.  An
+explicit normalization produces exactly one of three kinds of plane:
+
+```text
+nilpotent chain:          n² = e;
+idempotent-annihilator:   e² = e, en = ne = n² = 0;
+quadratic:                e² = e, ep = pe = p, p² = δe.
+```
+
+The nilpotent-chain extension is reduced to `W1`, `W2`, or a signed parameter
+family; algebraic closedness over `ℂ` and sign trichotomy over `ℝ` give the
+field-specific family lists.  Peirce decomposition of the idempotent branch
+gives `W4`--`W8`; the impossible `11` component is excluded by an explicit
+straight generator.  A second Peirce reduction of the quadratic branch gives
+`W9` and `W10` in the zero-eigenvalue cases, reduces nonzero eigenvalues back
+to `W4`--`W8`, and proves the remaining components unital or straight.
+
+The public theorems `complex_dimensionThree_coverage` and
+`real_dimensionThree_coverage` combine all four sectors.  The stronger
+`complex_dimensionThree_classification` and `real_dimensionThree_classification`
+state existence together with the exact candidate-equivalence `iff`.
+Finally, `complex_dimensionThree_quotient_classification` and
+`real_dimensionThree_quotient_classification` construct actual quotient types
+and prove that every associative table determines exactly one quotient class.
 
 ## Source independence
 
