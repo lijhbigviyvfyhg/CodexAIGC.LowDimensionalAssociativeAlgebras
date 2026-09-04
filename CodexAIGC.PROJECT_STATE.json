@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "updated": "2026-09-03",
+  "updated": "2026-09-04",
   "phase": 3,
   "status": "incremental_formalization_and_literature_audit",
   "environment": {
@@ -75,6 +75,23 @@
       "actual_associativity": true,
       "pairwise_nonisomorphism": true,
       "unique_coverage": true
+    },
+    "Complex_dimension_3_candidates": {
+      "fixed_tables": 23,
+      "parameter_families": 1,
+      "actual_associativity": true,
+      "exact_parameter_quotient": "k_modulo_sign",
+      "pairwise_candidate_nonisomorphism": true,
+      "unique_coverage": false
+    },
+    "Real_dimension_3_candidates": {
+      "common_fixed_tables": 23,
+      "real_only_fixed_tables": 2,
+      "parameter_families": 2,
+      "actual_associativity": true,
+      "exact_parameter_quotient": "k_modulo_sign_with_disjoint_families",
+      "pairwise_candidate_nonisomorphism": true,
+      "unique_coverage": false
     }
   },
   "counts": {

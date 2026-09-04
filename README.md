@@ -2,7 +2,7 @@
 
 [中文](#中文说明) · [Research scope](./CodexAIGC.RESEARCH_SCOPE.md) · [Search log](./CodexAIGC.PHASE2_SEARCH_LOG.md) · [Source audit](./CodexAIGC.PHASE2_SOURCE_VERIFICATION.md) · [Verification protocol](./CodexAIGC.VERIFICATION_PROTOCOL.md)
 
-> **Status: incremental formalisation and literature audit.** Dimensions zero through two are complete over all three target fields, and dimension three is complete over `𝔽₂`. Dimension three over `ℂ` and `ℝ`, and dimension four over every target field, remain open, so this repository does not yet claim the requested dimension-at-most-four classification.
+> **Status: incremental formalisation and literature audit.** Dimensions zero through two are complete over all three target fields, and dimension three is complete over `𝔽₂`. For dimension three over `ℂ` and `ℝ`, associativity and exact uniqueness of every listed candidate are now proved, but independent coverage of arbitrary algebras remains open. Dimension four remains open over every target field, so this repository does not yet claim the requested dimension-at-most-four classification.
 
 This is an audit-first Lean 4 project for a kernel-checked classification of finite-dimensional associative algebras of dimension at most four. Every eventual normal form must pass four separate gates:
 
@@ -23,7 +23,7 @@ Dimension two over `ℂ` and `ℝ` is now complete as well. There are exactly se
 
 Dimension three over `𝔽₂` is complete. The reproducible enumeration produces 1688 accepted associative table codes among all `2^27 = 134217728` bilinear tables. Lean proves that every accepted entry is associative, reconstructs an LRAT certificate forcing every associative bit assignment into those entries, checks an explicit invertible change of basis for every entry, and proves that there are exactly 28 `GL(3,2)` isomorphism classes by invariant separation and unique coverage. See [`DimensionThreeF2.lean`](./CodexAIGC/Classification/DimensionThreeF2.lean) and the [certificate and normal-form evidence report](./CodexAIGC.EVIDENCE_F2_DIMENSION_3.md).
 
-The real/complex dimension-three track has reached a candidate-audit milestone, not a classification theorem. Lean now checks associativity of the 23 isolated 2019 tables, both parameter families, and the three extra real forms. It proves that each waved family is parameterized exactly modulo `k ~ -k`, and over `ℝ` proves the ordinary and minus families disjoint. A second module literally transcribes the 21 isolated Fialowski--Penkava tables, proves an explicit isomorphism for every entry into the 2019 presentation, verifies every projective fibre of `d22(x:y)` over algebraically closed fields and over `ℝ`, and proves that the older displayed list omits zero multiplication. Global pairwise separation and an independent completeness proof remain open. See the [dimension-three source crosswalk](./CodexAIGC.DIMENSION_3_SOURCE_CROSSWALK.md).
+The real/complex dimension-three track has reached a candidate-uniqueness milestone, not yet a completeness theorem. Lean checks associativity of the 23 common fixed tables, the ordinary waved family, the two additional real fixed tables, and the real minus waved family. It computes exact product-space, annihilator, center, and commutator dimensions; resolves every remaining collision with transported polynomial invariants; proves the fixed tables pairwise nonisomorphic; proves that each waved family is parameterized exactly modulo `k ~ -k`; and over `ℝ` proves every candidate stratum disjoint, including the ordinary/minus families. The resulting `complexCandidateTable_isomorphic_iff` and `realCandidateTable_isomorphic_iff` theorems give exact isomorphism criteria inside both candidate lists. A separate source-crosswalk module explicitly verifies the older tables and exposes an omission of zero multiplication. Independent coverage of every arbitrary three-dimensional algebra is still open. See the [dimension-three uniqueness evidence](./CodexAIGC.EVIDENCE_REAL_COMPLEX_DIMENSION_3.md) and [source crosswalk](./CodexAIGC.DIMENSION_3_SOURCE_CROSSWALK.md).
 
 ## Build
 
@@ -41,13 +41,13 @@ Downloaded papers are kept locally under `CodexAIGC.references/pdfs/` and are ig
 
 ## 中文说明
 
-本项目目标是用 Lean 4 对不超过四维的有限维结合代数进行可核验分类。目前三个目标域上的零至二维已经完成，`𝔽₂` 上的三维分类也已完成；`ℂ`、`ℝ` 上的三维以及全部四维情形仍在进行，因而**尚未声称得到不超过四维的完整分类**。每个已完成切片都分别证明：结合律、确实定义一个同构类、候选之间两两不同构、以及对全部目标代数的存在唯一覆盖。
+本项目目标是用 Lean 4 对不超过四维的有限维结合代数进行可核验分类。目前三个目标域上的零至二维已经完成，`𝔽₂` 上的三维分类也已完成；`ℂ`、`ℝ` 三维候选表的结合律与候选内部唯一性已经完成，但对任意代数的独立覆盖尚未完成；全部四维情形也仍在进行。因此**尚未声称得到不超过四维的完整分类**。每个已完成切片都分别证明：结合律、确实定义一个同构类、候选之间两两不同构、以及对全部目标代数的存在唯一覆盖。
 
 已确认的范围分为三条独立轨道：复数 `ℂ`、实数 `ℝ` 和二元域 `𝔽₂`（Lean 中使用 `ZMod 2`）；维数包含 `0,1,2,3,4`。主分类不预设单位元；单位性与交换性作为经证明的标签及子分类记录。三个底域上的分类结论不互相沿用，每条轨道都需要独立的完整性与唯一性证明。
 
 当前已在任意域上完整证明维数 0 与维数 1 的分类，因此三条目标域轨道均已覆盖这两个维数。零维只有一个同构类；一维恰有零乘法与 `e * e = e` 两个同构类。二维也已在三条轨道上完成：`ℂ` 上恰有 7 类，`ℝ` 上恰有 8 类；`𝔽₂` 上 256 张双线性乘法表中 28 张满足结合律，组成恰好 8 个 `GL(2,2)` 同构轨道。`𝔽₂` 三维的可复现枚举产生 1688 个结合表条目；Lean 证明这些条目确实结合，用 LRAT 证书覆盖全部结合表，再用显式换基与同构不变量证明恰有 28 个同构类及存在唯一分类。`ℂ`、`ℝ` 三维及全部四维仍未完成，仓库不作整体完整性声明。
 
-`ℂ/ℝ` 三维目前只完成候选审计里程碑：Lean 已逐表验证 2019 候选的结合律，证明两个参数族都恰好按 `k ~ -k` 取商，并在实数上证明正、负号参数族互不相交；Fialowski--Penkava 的 21 个固定表及 `d22(x:y)` 的全部射影纤维也已显式换基到该候选框架，同时形式化确认旧表遗漏了零乘法。固定表与各族之间的全局两两不同构、以及对任意三维代数的独立完整覆盖仍未证明，详见[三维来源交叉核对](./CodexAIGC.DIMENSION_3_SOURCE_CROSSWALK.md)。
+`ℂ/ℝ` 三维现已完成候选唯一性里程碑：Lean 已逐表验证所有候选的结合律，计算乘积空间、左右零化子、中心与交换子空间的维数，并用平方零元、幂等元、立方零元及实数“复数块”等同构不变量消除全部粗签名碰撞。23 个公共固定表已证明两两不同构；两个参数族都恰好按 `k ~ -k` 取商；实数上所有固定表、两个额外固定表、正负参数族之间也已全部分离。`complexCandidateTable_isomorphic_iff` 与 `realCandidateTable_isomorphic_iff` 给出候选表内部的精确同构判据。Fialowski--Penkava 的旧表也已显式换基交叉核验，并形式化确认其遗漏零乘法。目前唯一尚缺的三维分类门槛，是对任意三维结合代数的独立存在性覆盖；详见[三维候选唯一性证据](./CodexAIGC.EVIDENCE_REAL_COMPLEX_DIMENSION_3.md)与[来源交叉核对](./CodexAIGC.DIMENSION_3_SOURCE_CROSSWALK.md)。
 
 ## License
 

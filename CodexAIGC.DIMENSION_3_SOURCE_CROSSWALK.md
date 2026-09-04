@@ -1,6 +1,6 @@
 # Dimension-three real/complex source crosswalk
 
-**Status:** candidate audit only; completeness and pairwise nonisomorphism are not yet claimed.
+**Status:** source crosswalk and candidate uniqueness are proved; independent completeness is not yet claimed.
 
 **Target fields:** `ℂ` and `ℝ` (the isolated crosswalk is proved over every characteristic-zero field).
 
@@ -24,7 +24,7 @@ The following statements are proved in
 
 - all 23 isolated Kobayashi tables define associative bilinear multiplications;
 - `W3(k)` and the real minus family are associative for every parameter;
-- the three additional real tables are associative;
+- the two additional real fixed tables and the real minus family are associative;
 - the map fixing the first two basis vectors and negating the third proves
   `W3(-k) ≅ W3(k)` in both families.
 
@@ -48,9 +48,19 @@ The candidate module additionally proves the converse parameter criteria
 `W3(k) ≅ W3(l) ↔ l=k or l=-k` for both families, and proves that the ordinary
 and minus families are never isomorphic over `ℝ`.
 
+The invariant and candidate-class modules additionally prove:
+
+- exact dimensions of `A²`, both annihilators, the center, and `[A,A]` for every
+  fixed table, both parameter families, and both real-only fixed tables;
+- transport of the refined square-zero, nilpotency, idempotent, and real
+  complex-block properties under every `TableEquiv`;
+- pairwise nonisomorphism of all 23 common fixed tables;
+- disjointness of every fixed/family and real-extra stratum;
+- exact global criteria `complexCandidateTable_isomorphic_iff` and
+  `realCandidateTable_isomorphic_iff` inside the displayed candidate lists.
+
 The following are still open and must not be inferred from this note:
 
-- separation of every fixed table from every other fixed table and family fibre;
 - an independent Lean proof that every three-dimensional real or complex
   associative multiplication occurs in the list.
 
