@@ -33,6 +33,41 @@ under a linear equivalence is immediate. -/
 def PairIndependent (x y : V K) : Prop :=
   x ≠ 0 ∧ ∀ a : K, y ≠ a • x
 
+theorem pairIndependent_iff_linearIndependent_pair {x y : V K} :
+    PairIndependent x y ↔ LinearIndependent K ![x, y] := by
+  constructor
+  · rintro ⟨hx, hy⟩
+    rw [LinearIndependent.pair_iff' hx]
+    intro a h
+    exact hy a h.symm
+  · intro h
+    have hx : x ≠ 0 := by
+      simpa using h.ne_zero 0
+    constructor
+    · exact hx
+    · intro a hya
+      rw [LinearIndependent.pair_iff' hx] at h
+      exact h a hya.symm
+
+/-- Coefficients in an independent pair are unique. -/
+theorem pairIndependent_smul_add_eq_smul_add_iff {x y : V K}
+    (hxy : PairIndependent x y) (a b c d : K) :
+    a • x + b • y = c • x + d • y ↔ a = c ∧ b = d := by
+  have hli : LinearIndependent K ![x, y] :=
+    pairIndependent_iff_linearIndependent_pair.mp hxy
+  constructor
+  · intro h
+    have hzero : (a - c) • x + (b - d) • y = 0 := by
+      rw [sub_smul, sub_smul]
+      calc
+        a • x - c • x + (b • y - d • y) =
+            (a • x + b • y) - (c • x + d • y) := by abel
+        _ = 0 := sub_eq_zero.mpr h
+    have hcoeff := LinearIndependent.pair_iff.mp hli (a - c) (b - d) hzero
+    exact ⟨sub_eq_zero.mp hcoeff.1, sub_eq_zero.mp hcoeff.2⟩
+  · rintro ⟨rfl, rfl⟩
+    rfl
+
 /-- There are two independent square-zero elements. -/
 def HasTwoIndependentSquareZero (c : StructureConstants K 3) : Prop :=
   ∃ x y, PairIndependent x y ∧ c.mul x x = 0 ∧ c.mul y y = 0

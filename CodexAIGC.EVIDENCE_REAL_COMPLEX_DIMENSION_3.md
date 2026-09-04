@@ -9,9 +9,11 @@ The candidate list has passed verification gates 1--3:
 3. all distinct candidate strata are nonisomorphic, including the two real-only
    fixed tables and the two mutually disjoint real parameter families.
 
-Gate 4 is still open: the repository does **not** yet prove that every arbitrary
-three-dimensional associative multiplication over `ℂ` or `ℝ` is isomorphic to
-one of these candidates.
+Gate 4 is partially complete.  The curled sector is now independently proved
+to consist exactly of `C0`--`C4`, over every characteristic-zero field.  The
+repository does **not** yet prove coverage for the unital, waved, or straight
+sectors, so it still makes no global dimension-three completeness claim over
+`ℂ` or `ℝ`.
 
 ## Candidate lists
 
@@ -93,6 +95,26 @@ waved, and straight sectors intrinsically; proves that sector membership is
 isomorphism-invariant; proves that every table belongs to exactly one sector;
 and reduces global real or complex coverage to four named sector obligations.
 None of those obligations is silently postulated.
+
+[`DimensionThreeRealComplexCurledReduction.lean`](./CodexAIGC/Classification/DimensionThreeRealComplexCurledReduction.lean)
+closes the curled obligation.  Its proof constructs, rather than assumes, a
+linear functional `λ` satisfying
+
+```text
+x² = λ(x) x
+xy + yx = λ(y) x + λ(x) y
+λ(xy) = λ(x) λ(y).
+```
+
+For `λ = 0`, associativity forces every triple product to vanish; a nonzero
+product and its two factors then give the explicit `C1` basis, while zero
+multiplication gives `C0`.  For `λ ≠ 0`, the proof normalizes an idempotent,
+proves multiplication on `ker λ` is zero, and classifies left multiplication
+by that idempotent according to projection rank `0`, `1`, or `2`, yielding
+`C4`, `C2`, or `C3`.  The public theorem
+`associative_curled_classification` packages the five alternatives, and
+`complex_curled_sector_coverage` and `real_curled_sector_coverage` discharge
+the corresponding field-specific sector obligations.
 
 ## Source independence
 

@@ -1,4 +1,5 @@
 import CodexAIGC.Classification.DimensionThreeRealComplexCandidateClasses
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 /-!
 # Completeness framework for dimension three over `ℂ` and `ℝ`
@@ -32,7 +33,17 @@ def IsCurled (c : StructureConstants K 3) : Prop :=
 
 /-- A basis-free independence predicate for three vectors. -/
 def TripleIndependent (x y z : V K) : Prop :=
-  PairIndependent x y ∧ ∀ a b : K, z ≠ a • x + b • y
+  LinearIndependent K (at3 x y z)
+
+theorem tripleIndependent_second_not_smul {x y z : V K}
+    (h : TripleIndependent x y z) (a : K) : y ≠ a • x := by
+  intro hya
+  rw [TripleIndependent, Fintype.linearIndependent_iff] at h
+  let g : Fin 3 → K := at3 (-a) 1 0
+  have hrel : ∑ i, g i • at3 x y z i = 0 := by
+    simp [g, Fin.sum_univ_three, hya]
+  have hone := h g hrel 1
+  simp [g] at hone
 
 /-- A straight table contains an element whose first three positive powers are
 linearly independent. -/
@@ -48,7 +59,7 @@ theorem isCurled_not_isStraight {c : StructureConstants K 3}
     (hc : IsCurled c) : ¬ IsStraight c := by
   rintro ⟨x, hx⟩
   obtain ⟨a, ha⟩ := hc x
-  exact hx.1.2 a ha
+  exact tripleIndependent_second_not_smul hx a ha
 
 private theorem hasTwoSidedIdentity_map
     {c d : StructureConstants K 3} (E : TableEquiv c d)
@@ -113,13 +124,17 @@ private theorem tripleIndependent_map
     {x y z : V K} (h : TripleIndependent x y z) :
     TripleIndependent (E.toLinearEquiv x) (E.toLinearEquiv y)
       (E.toLinearEquiv z) := by
-  rcases h with ⟨hxy, hz⟩
-  constructor
-  · exact pairIndependent_map E hxy
-  · intro a b hab
-    apply hz a b
-    apply E.toLinearEquiv.injective
-    simpa using hab
+  have hm := h.map' E.toLinearEquiv.toLinearMap
+    (LinearMap.ker_eq_bot.mpr E.toLinearEquiv.injective)
+  have heq : (fun i => E.toLinearEquiv (at3 x y z i)) =
+      at3 (E.toLinearEquiv x) (E.toLinearEquiv y)
+        (E.toLinearEquiv z) := by
+    funext i
+    fin_cases i <;> rfl
+  change LinearIndependent K
+    (at3 (E.toLinearEquiv x) (E.toLinearEquiv y) (E.toLinearEquiv z))
+  rw [← heq]
+  exact hm
 
 theorem tripleIndependent_map_iff
     {c d : StructureConstants K 3} (E : TableEquiv c d)
@@ -131,6 +146,61 @@ theorem tripleIndependent_map_iff
     have := tripleIndependent_map E.symm h
     simpa [TableEquiv.symm] using this
   · exact tripleIndependent_map E
+
+/-- The coordinate-to-vector equivalence whose columns are an independent
+triple.  This is the canonical change of basis used in the sector coverage
+proofs. -/
+noncomputable def basisEquivOfTripleIndependent {x y z : V K}
+    (h : TripleIndependent x y z) : V K ≃ₗ[K] V K := by
+  classical
+  exact (basisOfPiSpaceOfLinearIndependent h).equivFun.symm
+
+@[simp] theorem basisEquivOfTripleIndependent_e0 {x y z : V K}
+    (h : TripleIndependent x y z) :
+    basisEquivOfTripleIndependent h (e0 : V K) = x := by
+  classical
+  have hb0 : (basisOfPiSpaceOfLinearIndependent h) 0 = x := by
+    have hb := congrFun (coe_basisOfPiSpaceOfLinearIndependent h) 0
+    simpa [at3] using hb
+  rw [basisEquivOfTripleIndependent, Module.Basis.equivFun_symm_apply]
+  simp [e0, Fin.sum_univ_three, hb0]
+
+@[simp] theorem basisEquivOfTripleIndependent_e1 {x y z : V K}
+    (h : TripleIndependent x y z) :
+    basisEquivOfTripleIndependent h (e1 : V K) = y := by
+  classical
+  have hb1 : (basisOfPiSpaceOfLinearIndependent h) 1 = y := by
+    have hb := congrFun (coe_basisOfPiSpaceOfLinearIndependent h) 1
+    exact hb.trans (at3_one x y z)
+  rw [basisEquivOfTripleIndependent, Module.Basis.equivFun_symm_apply]
+  simp [e1, Fin.sum_univ_three, hb1]
+
+@[simp] theorem basisEquivOfTripleIndependent_e2 {x y z : V K}
+    (h : TripleIndependent x y z) :
+    basisEquivOfTripleIndependent h (e2 : V K) = z := by
+  classical
+  have hb2 : (basisOfPiSpaceOfLinearIndependent h) 2 = z := by
+    have hb := congrFun (coe_basisOfPiSpaceOfLinearIndependent h) 2
+    exact hb.trans (at3_two x y z)
+  rw [basisEquivOfTripleIndependent, Module.Basis.equivFun_symm_apply]
+  simp [e2, Fin.sum_univ_three, hb2]
+
+/-- Coordinate formula for the equivalence built from an independent triple. -/
+theorem basisEquivOfTripleIndependent_apply {x y z : V K}
+    (h : TripleIndependent x y z) (q : V K) :
+    basisEquivOfTripleIndependent h q =
+      q 0 • x + q 1 • y + q 2 • z := by
+  have hq : q = q 0 • (e0 : V K) + q 1 • e1 + q 2 • e2 := by
+    apply funext_three <;> simp [e0, e1, e2]
+  calc
+    basisEquivOfTripleIndependent h q =
+        basisEquivOfTripleIndependent h
+          (q 0 • (e0 : V K) + q 1 • e1 + q 2 • e2) := by rw [← hq]
+    _ = _ := by
+      rw [map_add, map_add, map_smul, map_smul, map_smul,
+        basisEquivOfTripleIndependent_e0,
+        basisEquivOfTripleIndependent_e1,
+        basisEquivOfTripleIndependent_e2]
 
 private theorem isStraight_map
     {c d : StructureConstants K 3} (E : TableEquiv c d)
