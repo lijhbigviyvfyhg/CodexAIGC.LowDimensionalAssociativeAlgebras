@@ -62,7 +62,7 @@ def HasComplexBlock (c : StructureConstants K 3) : Prop :=
   ∃ p x, p ≠ 0 ∧ c.mul p p = p ∧ c.mul x x = -p ∧
     c.mul p x = x ∧ c.mul x p = x
 
-private theorem pairIndependent_map
+theorem pairIndependent_map
     {c d : StructureConstants K 3} (E : TableEquiv c d) {x y : V K}
     (h : PairIndependent x y) :
     PairIndependent (E.toLinearEquiv x) (E.toLinearEquiv y) := by

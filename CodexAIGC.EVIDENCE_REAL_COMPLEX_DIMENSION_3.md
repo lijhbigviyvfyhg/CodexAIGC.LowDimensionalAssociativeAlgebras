@@ -87,6 +87,13 @@ realCandidateTable_isomorphic_iff
 
 so the precise candidate-class quotient is a theorem rather than a prose claim.
 
+[`DimensionThreeRealComplexCompletenessFramework.lean`](./CodexAIGC/Classification/DimensionThreeRealComplexCompletenessFramework.lean)
+starts gate 4 without assuming its conclusion.  It defines the unital, curled,
+waved, and straight sectors intrinsically; proves that sector membership is
+isomorphism-invariant; proves that every table belongs to exactly one sector;
+and reduces global real or complex coverage to four named sector obligations.
+None of those obligations is silently postulated.
+
 ## Source independence
 
 The literature tables are treated as inputs to audit, not proof authorities.

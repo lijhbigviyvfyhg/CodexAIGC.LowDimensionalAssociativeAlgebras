@@ -106,10 +106,10 @@ boundary points, the alternating point, and every nondegenerate fibre. Over an
 algebraically closed field it constructs the required ordinary waved parameter;
 over `R` it uses the sign of `x*y` to select the ordinary or minus family. Lean
 also proves that each waved family is parameterized exactly modulo sign and that
-the two real families are disjoint. This completes the crosswalk between the two
-displayed parameter presentations, but it is still not an independent proof that
-the candidate list covers every three-dimensional associative algebra or that all
-fixed sectors are mutually nonisomorphic.
+the two real families are disjoint. Later invariant modules now prove that all
+fixed tables and all candidate strata are mutually nonisomorphic. This completes
+the crosswalk and candidate uniqueness, but it is still not an independent proof
+that the candidate list covers every three-dimensional associative algebra.
 
 Version 6 of Bekbaev–Rakhimov goes further and says on page 11 that three unital
 complex tables must be added to the five in the 2019 list. Rendered inspection of
